@@ -1,0 +1,169 @@
+﻿Personas, Jobs-to-be-Done (JTBDs), and Relevant Metrics
+1. CEO, COO, Executive
+These roles generally fall under the Executive Leader profile or Data Driver Performa, focused on larger-scale decision-making.
+* Core Job: Use data to drive smarter and more efficient decision-making in the organization.
+* Primary Job Themes:
+   * Act / Decide (59% importance): Use data and insights in decision-making.
+   * Inform / Influence (31% importance): Bring data into decision-making processes.
+   * Learn / Analyze (9% importance): Answer questions with data.
+* Key Main Jobs & Micro Jobs:
+   * Decide whether to invest.
+   * Decide whether to stop, start, or continue an investment.
+   * Develop a plan influenced by data and insights (identified as the most challenging and time-consuming job for executives).
+   * Track key metrics or indicators.
+   * Assess the performance of something(s).
+   * Synthesize data and insights from multiple sources.
+   * Make recommendations based on data and insights.
+   * Construct a narrative around data and insights to confidently influence or execute decisions.
+   * Strategize on book of business.
+   * Make decisions about the optimal ways data can be actionable, accessible, performant, and secure across the organization (Data Driver Performa).
+* Cross-Cloud CSI Role: Strategic Planner – to make data-informed decisions about next steps, involving thinking decision-making, what-if scenario planning, and leveraging data with narratives in presentations.
+* Relevant Metrics:
+   * General Business Metrics: Sales, Customer satisfaction, Revenue, Expenses, ROI, Growth, Share, Profit.
+   * Sales-specific (Sales Leader): Sales revenue (Up), Customer satisfaction (Up), Forecasting accuracy (Up), Pipeline health (Up), Seller turnover (Down), Customer attrition (Down).
+   * Agent Impact: Cost and revenue comparison, what is gained in dollars. Total Cost of Ownership (TCO). Prioritized JTBD for agent impact. Agent performance and AI impact.
+   * Credit/Cost Monitoring: View & manage overall costs related to the solution, calculate ROI & Total Cost of Ownership (TCO), report on the impact of solutions, justify ongoing use and potential expansion, and assess impact on KPIs.
+   * Cross-Cloud Metrics: KPIs from sales calculators automatically appearing in monitoring views. ROI measurement across domains (finance, commerce, revenue). Customer-set thresholds for usage-based notifications. Proactive surfacing of relevant correlations or insights and anomaly detection.
+2. Marketing VP
+This role aligns with the Strategic Leader profile in Marketing Cloud and Executive Leader in Business Users.
+* Core Job: Use data to drive smarter and more efficient decision-making in the organization.
+* Primary Job Themes: Similar to other Executive Leaders: Act/Decide, Inform/Influence, Learn/Analyze.
+* Key Strategic Tasks: High-level departmental planning and strategy, Review departmental metrics and analysis, Monitor revenue and spending, Meet with vendors/partners/etc., Campaign strategy and coordination, Planning to implement defined strategies. Coordinate marketing and organizational strategy, provide guidance on marketing and project strategy, keep tabs on projects, create proposals & presentations for C-Suite executives.
+* Key Marketing Tasks: Brainstorm ways to increase marketing sophistication, Grow marketing department (multi-channel, technology), Data management, Content approval.
+* Cross-Cloud CSI Role: Can function as a Strategic Planner (assessing what to do next) or Weather Report(keeping a general pulse on customer experience for all important metrics).
+* Relevant Metrics:
+   * General Business Metrics: Sales, Customer satisfaction, Revenue, Expenses, ROI, Growth, Share, Profit.
+   * Marketing-specific: Brand affinity/engagement, Ad engagement, ROAS (Return on Ad Spend), New product metrics, Market direction.
+   * Success Measures: Expanding into multi-channel marketing, innovation, making a difference to company success. Tracking unique visits each channel drives.
+   * Cross-Cloud Metrics: KPIs from sales calculators automatically appearing in monitoring views. ROI measurement across domains. Assessing whether marketing campaigns lead to sales, and monitoring revenue, usage, and sentiment for overall customer experience.
+3. Marketing Specialist
+This role corresponds to the Marketing Specialist persona and Frontline Worker profile.
+* Core Job: Use data to drive smarter and more efficient decision-making in the organization.
+* Primary Job Themes: Act/Decide (41%), Learn/Analyze (36%), Inform/Influence (20%).
+* Key Strategic Tasks: Planning to implement defined strategies. Work with leadership team to define campaign strategy and direction.
+* Key Marketing Tasks: Audience segmentation, targeting, retargeting, managing user acquisition, building retention, executing campaigns. Adjust campaign and message tactics based on data, Align content between channels, Basic analysis of message and campaign metrics.
+* Key Tactical Tasks: Create content & place into marketing assets, Test sends, deploy content, Track and monitor metrics. Export data from Marketing Cloud, Create content and deploy messages and campaigns, Segment audiences and create/maintain lists, Create reports, Testing message deployments.
+* Social Marketing Specialist Tasks: Monitors content performance, Tracks ongoing industry news and stories, Discovers customer stories to share, Manages organic and paid social content, Performs target audience research, analysis, segmentation, and targeting, Creates and Monitors Reports and Dashboards, Manages Campaigns End-to-End.
+* Relevant Metrics:
+   * Marketing-specific: Brand affinity/engagement, Ad engagement, ROAS, New product metrics, Market direction.
+   * Success Measures: Executing successful campaigns, finding valuable insights using analytics. Tracking real-time results for email deliverability, opens, and clicks.
+   * Tactical Metrics: Campaign performance, Deliverability, Open rates, Click-through rates.
+   * Social Marketing Metrics: Content performance.
+   * Advertising Marketing Metrics: Campaign Performance.
+4. Marketing Manager
+This role aligns with the Marketing Manager persona and Strategic Manager profile.
+* Core Job: Use data to drive smarter and more efficient decision-making in the organization.
+* Primary Job Themes: Act/Decide (45%), Inform/Influence (26%), Learn/Analyze (24%), Prepare/Build (5%).
+* Key Strategic Tasks: Campaign strategy and coordination, Manage marketing team(s). Strategize about campaigns & associated content, manage cadence of communications, strategize about targeting/audience strategy, work with clients & partners.
+* Key Marketing Tasks: Manage data, Segmentation, Approve content, Create automations, Understand and use analytics for strategic and cross-channel purposes, Creative direction and alignment across campaigns and channels, Coordinate campaigns across teams and channels, Build audiences.
+* Key Tactical Tasks: Manage data (e.g., cleaning data).
+* Business User Performa: Falls under Business Managers (LOB Leads), leveraging data and derived insights to make informed decisions and actions.
+* Relevant Metrics:
+   * Marketing-specific: Brand affinity/engagement, Ad engagement, ROAS, New product metrics, Market direction.
+   * Success Measures: Growing revenue and enhancing customer experience through sophisticated cross-channel marketing, ensuring flawless campaign execution.
+   * Campaign Metrics: Campaign metrics, click-through and open rates, revenue, customer experience.
+   * Cross-Cloud Metrics: KPIs from sales calculators automatically appearing in monitoring views. ROI measurement across domains.
+5. Sales VP
+This role is equivalent to a Sales Leader persona and Executive Leader profile in the Business User context.
+* Core Job: Use data to drive smarter and more efficient decision-making in the organization.
+* Primary Job Themes: Predominantly Act/Decide, Inform/Influence, and Learn/Analyze, reflecting larger-scale decision-making.
+* Key Main Jobs:
+   * Strategize & manage operations: Set vision & strategy, strategize on book of business, forecast sales revenue.
+   * Plan & manage incentive compensation: Guide direction for compensation, team structure, and training.
+   * Build & develop sales teams: Motivate teams.
+   * Nurture & Close: Review & guide team based on Forecasts, deal insights, Help unblock at-risk deals.
+* Cross-Cloud CSI Role: Strategic Planner – to make data-informed decisions about next steps, including setting strategies and reviewing forecasts.
+* Data Driver Performa: Makes decisions about the optimal ways data can be actionable, accessible, performant, and secure across the organization, potentially responsible for a business unit or pillar.
+* Collaboration: Collaborates with Finance, Marketing, and the CEO to set company strategy and Sales org goals.
+* Relevant Metrics:
+   * General Business Metrics: Sales, Customer satisfaction, Revenue, Expenses, ROI, Growth, Share, Profit.
+   * Sales-specific: Sales revenue (Up), Customer satisfaction (Up), Forecasting accuracy (Up), Pipeline health (Up), Seller turnover (Down), Customer attrition (Down).
+   * Sales Leader Top Activities: Viewing and creating reports and dashboards, customizing and administering Salesforce, collaborating with colleagues.
+   * Quota Metrics: Revenue (45%), Activity (16%), Leads (13%) for those with a quota.
+   * Cross-Cloud Metrics: KPIs from sales calculators automatically appearing in monitoring views. ROI measurement across domains.
+6. Sales Ops, Sales Agent/Account Executive, Sales Leader
+* Sales Operations (Sales Operations & Enablement persona):
+   * Top Jobs: Deliver data insights and accurate forecasts, Optimize sales processes and scale best practices, Manage sales tools, tech, and data, Manage team compensation plans, Lead sales enablement and training efforts.
+   * Key Micro Jobs:
+      * Strategize & manage operations: Perform sales planning (gather & prep data, create & iterate sales plans, determine sales team composition), Forecast sales revenue (review historical and actual revenue, combine sales data, estimate close dates, determine probability of closing deals), Manage sales tools, systems & processes (run pilot programs, build proposals, work with Admins to setup tools, get approvals, roll out training, monitor usage, continually evaluate tools).
+      * Plan & manage incentive compensation: Set incentive comp strategy (determine comp goals, model and compare structures, benchmark against market rates), Communicate comp plan (publish & assign plans, onboard & communicate, create & route agreements, comply with regulations), Execute comp plan (integrate comp data, deliver statements, provide visibility, enable sellers to track progress, enable team to estimate future earnings).
+      * Build & develop sales teams: Train talent (create/contract-out content, standardize for consistency, deliver training programs, streamline operational processes), Coach talent (provide performance insights, monitor/troubleshoot programs, optimize/update programs, create playbooks/policies).
+   * Relevant Metrics:
+      * KPIs: Sales productivity (Up), Forecast accuracy (Up), Sales team satisfaction (Up), Usage of key tools (Up), Time to implement tools (Down), Data inaccuracies (Down), Team inefficiencies (Down).
+      * Sales Process Metrics: Pipeline quality, Seller certifications, Deal velocity, Win-loss rate, Orchestration across agents and tasks, Productivity increases across agents and tasks. Quota attainment, Lead / sales conversion.
+* Sales Agent / Account Executive (Seller, Deal Closer, Pipeline Builder, Trusted Advisor personas):
+   * Core Job (Business User): Use data to drive smarter and more efficient decision-making in the organization.
+   * Primary Jobs: Prospect and/or close deals with new and existing customers.
+   * Top Jobs: Strategize on book of business, Find & qualify leads, Develop & pitch solutions, Monitor pipeline & nurture deals, Negotiate & close deals, Retain & grow customers.
+   * Key Micro Jobs:
+      * Prospecting: Find new leads, answer inbound leads, qualify & nurture leads, prospect for new opportunities in existing accounts.
+      * Working Deals: Gather requirements from prospects, prepare for sales calls/meetings, demo/present solutions, prepare quotes/contracts, conduct in-person sales meetings, close deals.
+      * Account Management: Upsell products, maintain relationships with existing customers, manage renewals.
+   * Relevant Metrics:
+      * KPIs: New and existing customer revenue (Up), Quota attainment (Up), Lead / sales conversion (Up), Time to close (Down), Lost deals (Down).
+      * Task Impact Metrics: # Leads generated / scored, Emails + email replies, Seller time saved, Opportunity Status, Opportunity Win Rate, Sales Mgr Time Saved.
+      * Quota (Deal Closer): Revenue (85%), Activity (29%), Leads (24%).
+      * Quota (Pipeline Builder): Revenue (68%), Activities (40%), Leads (35%).
+      * Quota (Trusted Advisor): Revenue (35%), Activities (16%), Leads (11%).
+* Sales Leader: (Covered above with Sales VP due to significant overlap in strategic responsibilities and metrics).
+7. Service VP
+This role aligns with SVP+ in Service Intelligence research and Executive Leader.
+* Core Job: Use data to drive smarter and more efficient decision-making in the organization.
+* Key Capabilities (High Perceived Value): Automation failure alerts and diagnostics, Product / service impact on customer / service outcomes diagnostics, Customer 360 (Integrating Non-CRM Data and Show Pertinent Data), Intelligent Prioritization of Inbound Volume Based on Issue Severity / Customer Segment, Intelligent Collaboration b/w Agents & SMEs or Other Depts., Intelligent Elevation of and Knowledge Articles to Agents, Compliance Monitoring To Facilitate Superior Quality Management and Coaching, Customer- or Business-Outcome Driven Action Recommendations for Agents.
+* Data Driver Performa: Makes decisions about the optimal ways data can be actionable, accessible, performant, and secure across the organization.
+* Cross-Cloud CSI Role: Strategic Planner – for making data-informed decisions about next steps for service operations.
+* Relevant Metrics:
+   * General Business Metrics: Sales, Customer satisfaction, Revenue, Expenses, ROI, Growth, Share, Profit.
+   * Service Intelligence: Customer outcomes driving on-screen components, flows, and systems (e.g., routing). Predictive intelligence concepts (e.g., predicting SLA violations). Customer Lifetime Value (CLV), customer health, engagement.
+   * Agent Performance: Monitoring cost, prioritized JTBD for agent impact. Agent ROI, Business Value and ROI. Agent performance expected to coincide with evaluation of AI impact.
+8. Service Supervisor, Customer Service Agent
+* Customer Service Agent (Case Solver / Expert Agent / Frontline Worker persona):
+   * Core Job (Business User): Use data to drive smarter and more efficient decision-making in the organization.
+   * Primary Jobs (Case Solver): Provide direct customer support, solve escalated cases.
+   * Primary Jobs (Expert Agent): Solve escalated cases, create and/or update Knowledge articles.
+   * Key Capabilities (High Perceived Value): Automation failure alerts and diagnostics, Intelligent Prioritization of Inbound Volume, Intelligent Collaboration b/w Agents & SMEs or Other Depts., Intelligent Elevation of Knowledge Articles to Agents, Agent performance opportunity diagnostics and recommendations.
+   * Command Center JTBD: Understanding if the agent is working well, why or why not, and what can be done to make it better. Addressing user failure points like "It doesn't work," "It's wrong," "It doesn't understand," "It's missing something," or "It's not worth using".
+   * Relevant Metrics:
+      * Customer Service-specific: Customer satisfaction, Number of contacts, Time to respond, Time to resolve issue, Type of issues, Quality of response/care.
+      * Agent Performance: Quality score, accuracy, success. Agent ROI.
+      * Productivity: Agent time savings (especially for frequent, medium-to-high complexity, or very frequent low-complexity tasks).
+      * Agent Health/System Status: How agents are performing (e.g., latency), how to optimize agent performance.
+      * Trusted Agentic Experiences: Are agents following legal/regulatory requirements, mitigating privacy/security risks, improving accuracy.
+      * Cross-Cloud Metrics: Visibility of cross-departmental activity data (e.g., marketing campaigns, sales calls) on the customer profile. Overall marketing engagement metrics, sentiment trends, contact/case history missing.
+* Service Supervisor (Team Leader / Strategic Manager persona):
+   * Core Job (Business User): Use data to drive smarter and more efficient decision-making in the organization.
+   * Primary Jobs: Supervise & manage service agents, interview & hire service agents, train agents.
+   * Key Capabilities (High Perceived Value): Automation failure alerts and diagnostics, Product / service impact on customer / service outcomes diagnostics, Intelligent Prioritization of Inbound Volume, Intelligent Collaboration b/w Agents & SMEs or Other Depts., Intelligent Elevation of Knowledge Articles to Agents, Compliance Monitoring To Facilitate Superior Quality Management and Coaching. Proactive service opportunity detection, Real-time coaching opportunity detection, Contact driver analytics as an input to agent training planning.
+   * Command Center JTBD: Monitoring agent performance, reviewing agent programming for accurate responses, evaluating cost and ROI. Inputs into ROI calculations, expectations for monitoring cost, prioritized JTBD for agent impact.
+   * Relevant Metrics:
+      * Customer Service-specific: Customer satisfaction, Number of contacts, Time to respond, Time to resolve issue, Type of issues, Quality of response/care.
+      * Team Leader Top Activities: Viewing case status, creating/viewing reports and dashboards, collaborating to solve cases.
+      * Employee Productivity and Customer Issues: Rely on reports and dashboards to stay informed.
+      * Cross-Cloud Metrics: Visibility of cross-departmental activity data on customer profile. Overall marketing engagement metrics, sentiment trends, contact/case history.
+9. Field Service VP
+This role aligns with an Operations Manager in Field Service Operations and Executive Leader.
+* Core Job: Use data to drive smarter and more efficient decision-making in the organization.
+* Big Jobs (Operations Domain): Manage Assets, Support Mobile Workers Onsite, Plan Capacity, Process Improvement.
+* Key Main Jobs:
+   * Manage Assets: Manage service contracts, monitor asset performance, manage maintenance plans, process repairs & returns, track & manage inventory.
+   * Plan Capacity: Understand workforce capacity, forecast work demand, identify capacity/inventory gaps, create hiring plan to fill gaps.
+* Data Driver Performa: Makes decisions about the optimal ways data can be actionable, accessible, performant, and secure across the organization.
+* Relevant Metrics:
+   * General Business Metrics: Sales, Customer satisfaction, Revenue, Expenses, ROI, Growth, Share, Profit.
+   * Manage Assets Outcomes: Minimize customer conversion rate, maximize asset uptime, minimize risks (contractual, regulatory), minimize cost to service assets, maximize number of replaced assets, maximize equipment costs, increase customer satisfaction, increase chance of receiving parts in time, minimize time to replenish inventory.
+   * Understand Workforce Capacity Outcomes: Establish baseline for current workforce, accurately represent current workforce capabilities, measure how productive, efficient current teams are.
+   * Cross-Cloud Metrics: KPIs from sales calculators automatically appearing in monitoring views. ROI measurement across domains. Proactive surfacing of relevant correlations or insights.
+10. Dispatcher, Planner, Scheduler
+This role aligns with the Dispatcher persona in Field Service and Frontline Worker profile. A "Planner" or "Scheduler" would likely perform similar functions.
+* Core Job (Business User): Use data to drive smarter and more efficient decision-making in the organization.
+* Primary Jobs (Schedule & Dispatch):
+   * Understand Team's Workload: Review messages & workload, review team's planned service, monitor number of required maintenance appointments, inform mobile worker of upcoming appointments.
+   * Assign Work: Gather & review critical service appointment requirements, determine scope of work, find mobile worker with right skills, assign mobile worker availability, assign & dispatch mobile workers.
+   * Schedule Appointments: Review assigned work for important details, assess necessary tools, parts & equipment, determine route, confirm time & date.
+   * Monitor Day of Service Activities: Identify scheduling irregularities, investigate negative customer experiences, track asset & equipment's real time status, track mobile workforce progression, notify team members of important case details, identify potential risks & service demand.
+   * Handle Service Exceptions: Reschedule appointments, deploy emergency service protocols, escalate case as needed, respond to customer inquiries, notify team of urgent announcements, replace broken equipment, find staff replacements.
+* Goals & Motivations (Field Dispatcher): Resolve customer issues, maximize efficiency of technicians in the field, minimize need for repeat visits, support technicians.
+* Relevant Metrics:
+   * Schedule & Dispatch Outcomes: Understand workload for the day, be well prepared for upcoming service appointments, increase the chance of resolving customer issue in the first visit, record customer information accurately, find mobile worker quickly, schedule mobile worker the shortest distance, increase customer satisfaction, communicate clear expectations with customer, identify high priority cases, minimize customer wait times, identify most efficient route, reduce travelling to dangerous areas, maximize resource utilization, identify irregularities, minimize chances of service disruption, maximize customer satisfaction, minimize time to resolve the customer issue, maximize customer satisfaction, minimize the risk of customer attrition, increase likelihood that customers will purchase more services in the future, increase stakeholders awareness of case details.
+   * Field Dispatcher Top Activities: Handle incoming requests from customers, assign requests to technicians based on priority, location, skills, & parts, manage schedule, review completed work orders, maintain inventory.
+   * Cross-Cloud Metrics: While not explicitly detailed, the nature of these roles suggests the need for relevant metrics from other clouds (e.g., Service, Sales, Inventory) for a holistic view to inform dispatching and scheduling decisions. This aligns with the broader Cross-Cloud CSI goal of leveraging AI to proactively surface relevant correlations or insights.

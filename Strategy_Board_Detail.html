@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy Board Detail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f3f3f3;
+            --text-primary: #181818;
+            --text-secondary: #706e6b;
+            --text-weak: #706e6b;
+            --border-primary: #c9c7c5;
+            --border-secondary: #dddbda;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-medium: rgba(0,0,0,0.15);
+            --slds-c-color-brand: #0176d3;
+            --slds-c-color-success: #04844b;
+            --slds-c-color-warning: #ffb71b;
+            --slds-c-color-error: #c23934;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow: hidden;
+        }
+
+        .strategy-editor-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .strategy-board-panel {
+            flex: 1;
+            background: var(--bg-primary);
+            overflow-y: auto;
+            border-right: 1px solid var(--border-primary);
+        }
+
+        .agentforce-chat-panel {
+            width: 400px;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-primary);
+        }
+
+        .board-header {
+            background: linear-gradient(135deg, var(--slds-c-color-brand) 0%, #4A90E2 100%);
+            color: white;
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .board-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .board-meta-info {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            opacity: 0.9;
+        }
+
+        .meta-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .board-content {
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .section.highlighted {
+            border-color: var(--slds-c-color-brand);
+            box-shadow: 0 0 0 3px rgba(1, 118, 211, 0.1);
+            background: rgba(1, 118, 211, 0.02);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .objective-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .objective-card.highlighted {
+            border-color: var(--slds-c-color-brand);
+            background: rgba(1, 118, 211, 0.05);
+        }
+
+        .objective-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: var(--bg-tertiary);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--slds-c-color-brand);
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.success { background: var(--slds-c-color-success); }
+        .progress-fill.warning { background: var(--slds-c-color-warning); }
+        .progress-fill.error { background: var(--slds-c-color-error); }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.on-track {
+            background: rgba(4, 132, 75, 0.1);
+            color: var(--slds-c-color-success);
+        }
+
+        .status-badge.needs-attention {
+            background: rgba(255, 183, 27, 0.1);
+            color: var(--slds-c-color-warning);
+        }
+
+        .status-badge.behind {
+            background: rgba(194, 57, 52, 0.1);
+            color: var(--slds-c-color-error);
+        }
+
+        .status-badge.exceeding {
+            background: rgba(4, 132, 75, 0.1);
+            color: var(--slds-c-color-success);
+        }
+
+        .status-badge.achieved {
+            background: rgba(1, 118, 211, 0.1);
+            color: var(--slds-c-color-brand);
+        }
+
+        .status-badge.ahead {
+            background: rgba(1, 118, 211, 0.1);
+            color: var(--slds-c-color-brand);
+        }
+
+        .chat-header {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-primary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .ai-indicator {
+            background: var(--slds-c-color-brand);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .conversation-chips {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .chips-title {
+            font-size: 0.8rem;
+            color: var(--text-weak);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .chip {
+            display: inline-block;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            padding: 0.5rem 0.75rem;
+            margin: 0.25rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chip:hover {
+            background: var(--slds-c-color-brand);
+            color: white;
+            border-color: var(--slds-c-color-brand);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .message.ai .message-avatar {
+            background: var(--slds-c-color-brand);
+            color: white;
+        }
+
+        .message.user .message-avatar {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-primary);
+            color: var(--text-primary);
+        }
+
+        .message-content {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            max-width: 80%;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .message.user .message-content {
+            background: var(--slds-c-color-brand);
+            color: white;
+            border-color: var(--slds-c-color-brand);
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border-primary);
+            background: var(--bg-primary);
+        }
+
+        .input-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .chat-textarea {
+            flex: 1;
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 0.75rem;
+            resize: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .send-button {
+            background: var(--slds-c-color-brand);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .send-button:hover {
+            background: #014486;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-weak);
+            font-size: 0.8rem;
+            font-style: italic;
+            padding: 0.5rem 1rem;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-weak);
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .timeline-section {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-secondary);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--text-weak);
+            min-width: 80px;
+        }
+
+        .timeline-milestone {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .risks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .risk-item {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--slds-c-color-warning);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .risk-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .risk-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .agentforce-chat-panel {
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .strategy-editor-container {
+                flex-direction: column;
+            }
+            
+            .agentforce-chat-panel {
+                width: 100%;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="strategy-editor-container">
+        <!-- Strategy Board Panel -->
+        <div class="strategy-board-panel">
+            <div class="board-header">
+                <div class="board-title" id="board-title">Loading...</div>
+                <div class="board-meta-info" id="board-meta">
+                    <div class="meta-item" id="board-category">Category</div>
+                    <div class="meta-item" id="board-status">Status</div>
+                    <div class="meta-item" id="board-owner">Owner</div>
+                    <div class="meta-item" id="board-timeline">Timeline</div>
+                </div>
+            </div>
+
+            <div class="board-content">
+                <!-- Overview Section -->
+                <div class="section" id="overview-section">
+                    <div class="section-title">
+                        <span class="section-icon">🎯</span>
+                        Strategic Overview
+                    </div>
+                    <p id="board-description">Loading strategic overview...</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--text-weak); margin-bottom: 0.25rem;">TARGET</div>
+                            <div style="font-size: 1.2rem; font-weight: 600;" id="board-target">Loading...</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--text-weak); margin-bottom: 0.25rem;">CURRENT</div>
+                            <div style="font-size: 1.2rem; font-weight: 600;" id="board-current">Loading...</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--text-weak); margin-bottom: 0.25rem;">PROGRESS</div>
+                            <div style="font-size: 1.2rem; font-weight: 600;" id="board-progress">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Objectives Section -->
+                <div class="section" id="objectives-section">
+                    <div class="section-title">
+                        <span class="section-icon">📊</span>
+                        Key Objectives
+                    </div>
+                    <div class="objectives-grid" id="objectives-grid">
+                        <!-- Objectives will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Timeline Section -->
+                <div class="section" id="timeline-section">
+                    <div class="section-title">
+                        <span class="section-icon">📅</span>
+                        Strategic Timeline
+                    </div>
+                    <div class="timeline-section" id="timeline-content">
+                        <!-- Timeline items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Risk Assessment Section -->
+                <div class="section" id="risks-section">
+                    <div class="section-title">
+                        <span class="section-icon">⚠️</span>
+                        Risk Assessment
+                    </div>
+                    <div class="risks-grid" id="risks-grid">
+                        <!-- Risk items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentforce Chat Panel -->
+        <div class="agentforce-chat-panel">
+            <div class="chat-header">
+                <span class="chat-title">🤖 Agentforce</span>
+                <span class="ai-indicator">AI Assistant</span>
+            </div>
+
+            <div class="conversation-chips">
+                <div class="chips-title">Quick Actions</div>
+                <div class="chip" onclick="sendQuickMessage('Update the timeline for Q2 deliverables')">Update Timeline</div>
+                <div class="chip" onclick="sendQuickMessage('Add new risk assessment for competitive threats')">Add Risk</div>
+                <div class="chip" onclick="sendQuickMessage('Suggest improvements for underperforming objectives')">Optimize Goals</div>
+                <div class="chip" onclick="sendQuickMessage('Generate progress report for stakeholders')">Create Report</div>
+                <div class="chip" onclick="sendQuickMessage('What if we increase the budget by 20%?')">What-If Analysis</div>
+                <div class="chip" onclick="sendQuickMessage('Show me similar successful strategies')">Best Practices</div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="message ai">
+                    <div class="message-avatar">AI</div>
+                    <div class="message-content" id="initial-message">
+                        Hello! I'm here to help you optimize your strategy. I can help you update objectives, analyze risks, create reports, and provide strategic insights. What would you like to work on?
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <div class="input-container">
+                    <textarea class="chat-textarea" id="chat-input" placeholder="Ask Agentforce to modify your strategy..." rows="2"></textarea>
+                    <button class="send-button" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Strategy board data
+        const strategyBoards = {
+            1: {
+                title: "FY25 Growth Vision",
+                category: "Revenue",
+                status: "On Track",
+                progress: 78,
+                owner: "CEO",
+                timeline: "Q4 FY25",
+                target: "$100M",
+                current: "$78M",
+                description: "Drive aggressive revenue growth through market expansion, customer acquisition, and product innovation to achieve $100M revenue target by Q4 FY25.",
+                objectives: [
+                    { title: "Market Expansion", progress: 85, status: "On Track" },
+                    { title: "Product Innovation", progress: 72, status: "On Track" },
+                    { title: "Customer Acquisition", progress: 68, status: "Needs Attention" }
+                ]
+            },
+            2: {
+                title: "Customer Experience Excellence",
+                category: "CX",
+                status: "Needs Attention",
+                progress: 64,
+                owner: "CMO",
+                timeline: "Q2 FY25",
+                target: "4.5/5 CSAT",
+                current: "3.2/5 CSAT",
+                description: "Transform customer experience across all touchpoints to achieve industry-leading satisfaction scores and drive customer loyalty.",
+                objectives: [
+                    { title: "Service Quality Improvement", progress: 45, status: "Behind" },
+                    { title: "Digital Experience Enhancement", progress: 78, status: "On Track" },
+                    { title: "Customer Support Optimization", progress: 62, status: "Needs Attention" }
+                ]
+            },
+            3: {
+                title: "AI-First Operations",
+                category: "AI",
+                status: "Exceeding",
+                progress: 123,
+                owner: "CTO",
+                timeline: "Q3 FY25",
+                target: "78% Automation",
+                current: "78% Achieved",
+                description: "Implement AI-driven automation across core business processes to improve efficiency, reduce costs, and enhance decision-making capabilities.",
+                objectives: [
+                    { title: "Process Automation", progress: 135, status: "Exceeding" },
+                    { title: "AI Analytics Implementation", progress: 115, status: "Exceeding" },
+                    { title: "Staff Training & Adoption", progress: 92, status: "On Track" }
+                ]
+            },
+            4: {
+                title: "ESG Leadership Initiative",
+                category: "ESG",
+                status: "Ahead",
+                progress: 112,
+                owner: "CSO",
+                timeline: "Q1 FY25",
+                target: "Carbon Neutral",
+                current: "Achieved",
+                description: "Lead industry in environmental, social, and governance practices while achieving carbon neutrality and driving sustainable business growth.",
+                objectives: [
+                    { title: "Carbon Neutrality", progress: 120, status: "Achieved" },
+                    { title: "Sustainable Operations", progress: 108, status: "Ahead" },
+                    { title: "ESG Reporting", progress: 95, status: "On Track" }
+                ]
+            }
+        };
+
+        // Get board ID from URL parameters
+        function getBoardIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id') || '1';
+        }
+
+        // Load board data
+        function loadBoardData() {
+            const boardId = getBoardIdFromUrl();
+            const boardData = strategyBoards[boardId];
+            
+            if (!boardData) {
+                document.getElementById('board-title').textContent = 'Strategy Board Not Found';
+                return;
+            }
+
+            // Update header
+            document.getElementById('board-title').textContent = boardData.title;
+            document.getElementById('board-category').textContent = boardData.category;
+            document.getElementById('board-status').textContent = boardData.status;
+            document.getElementById('board-owner').textContent = boardData.owner;
+            document.getElementById('board-timeline').textContent = boardData.timeline;
+
+            // Update overview
+            document.getElementById('board-description').textContent = boardData.description;
+            document.getElementById('board-target').textContent = boardData.target;
+            document.getElementById('board-current').textContent = boardData.current;
+            document.getElementById('board-progress').textContent = boardData.progress + '%';
+
+            // Update initial message
+            document.getElementById('initial-message').textContent = 
+                `Hello! I'm here to help you optimize your ${boardData.title} strategy. I can help you update objectives, analyze risks, create reports, and provide strategic insights. What would you like to work on?`;
+
+            // Load objectives
+            loadObjectives(boardData.objectives);
+            
+            // Load timeline
+            loadTimeline(boardData.timeline);
+            
+            // Load risks
+            loadRisks();
+        }
+
+        function loadObjectives(objectives) {
+            const grid = document.getElementById('objectives-grid');
+            grid.innerHTML = objectives.map(obj => `
+                <div class="objective-card">
+                    <div class="objective-title">${obj.title}</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill ${obj.status === 'Exceeding' ? 'success' : obj.status === 'Needs Attention' ? 'warning' : obj.status === 'Behind' ? 'error' : ''}" style="width: ${Math.min(obj.progress, 100)}%"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>${obj.progress}%</span>
+                        <span class="status-badge ${obj.status.toLowerCase().replace(' ', '-')}">${obj.status}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadTimeline(timeline) {
+            const content = document.getElementById('timeline-content');
+            content.innerHTML = `
+                <div class="timeline-item">
+                    <div class="timeline-date">Q1 2024</div>
+                    <div class="timeline-milestone">Initiative Launch & Team Formation</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q2 2024</div>
+                    <div class="timeline-milestone">Phase 1 Implementation</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Q3 2024</div>
+                    <div class="timeline-milestone">Mid-term Review & Optimization</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">${timeline}</div>
+                    <div class="timeline-milestone">Target Achievement</div>
+                </div>
+            `;
+        }
+
+        function loadRisks() {
+            const grid = document.getElementById('risks-grid');
+            grid.innerHTML = `
+                <div class="risk-item">
+                    <div class="risk-title">Market Volatility</div>
+                    <div class="risk-description">Economic uncertainty may impact customer spending patterns</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-title">Resource Constraints</div>
+                    <div class="risk-description">Limited budget allocation for Q3 initiatives</div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-title">Competitive Pressure</div>
+                    <div class="risk-description">New market entrants increasing competition</div>
+                </div>
+            `;
+        }
+
+        // Chat functionality
+        let isTyping = false;
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message || isTyping) return;
+
+            addMessage('user', message);
+            input.value = '';
+            
+            setTimeout(() => {
+                processAIResponse(message);
+            }, 500);
+        }
+
+        function sendQuickMessage(message) {
+            if (isTyping) return;
+            addMessage('user', message);
+            setTimeout(() => {
+                processAIResponse(message);
+            }, 500);
+        }
+
+        function addMessage(sender, content) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${sender === 'ai' ? 'AI' : 'CEO'}</div>
+                <div class="message-content">${content}</div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing-indicator';
+            
+            typingDiv.innerHTML = `
+                <div class="message-avatar">AI</div>
+                <span>Agentforce is analyzing...</span>
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function processAIResponse(userMessage) {
+            isTyping = true;
+            showTypingIndicator();
+
+            // Simulate AI processing time
+            setTimeout(() => {
+                removeTypingIndicator();
+                
+                // Generate contextual AI response
+                let response = generateAIResponse(userMessage);
+                
+                addMessage('ai', response.message);
+                
+                // Apply visual updates if needed
+                if (response.highlightSection) {
+                    highlightSection(response.highlightSection);
+                }
+                
+                if (response.updateContent) {
+                    updateBoardContent(response.updateContent);
+                }
+                
+                isTyping = false;
+            }, 2000 + Math.random() * 1000);
+        }
+
+        function generateAIResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            if (message.includes('timeline') || message.includes('schedule')) {
+                return {
+                    message: "I've analyzed your timeline and suggest moving the Q2 milestone forward by 2 weeks to create buffer time. I'm highlighting the timeline section for your review.",
+                    highlightSection: 'timeline-section',
+                    updateContent: { type: 'timeline', action: 'optimize' }
+                };
+            }
+            
+            if (message.includes('risk') || message.includes('threat')) {
+                return {
+                    message: "I've identified a new competitive risk and added it to your risk assessment. The market analysis shows 3 new competitors entering your space. Would you like me to develop mitigation strategies?",
+                    highlightSection: 'risks-section',
+                    updateContent: { type: 'risk', action: 'add' }
+                };
+            }
+            
+            if (message.includes('objective') || message.includes('goal')) {
+                return {
+                    message: "I've analyzed your objectives and found that Customer Acquisition is 10% behind target. I recommend reallocating 15% of marketing budget from brand awareness to lead generation. Highlighting the objectives for your review.",
+                    highlightSection: 'objectives-section',
+                    updateContent: { type: 'objective', action: 'optimize' }
+                };
+            }
+            
+            if (message.includes('report') || message.includes('summary')) {
+                return {
+                    message: "I've generated a comprehensive progress report for your stakeholders. The report shows 78% overall progress with 2 objectives on track and 1 needing attention. Would you like me to schedule the stakeholder review meeting?",
+                    highlightSection: 'overview-section'
+                };
+            }
+            
+            if (message.includes('what if') || message.includes('budget')) {
+                return {
+                    message: "With a 20% budget increase, I project a 15% improvement in timeline and 85% probability of exceeding targets. The additional funding would accelerate Customer Acquisition by 6 weeks. Should I update the financial projections?",
+                    highlightSection: 'objectives-section'
+                };
+            }
+            
+            if (message.includes('best practice') || message.includes('similar')) {
+                return {
+                    message: "I found 3 similar strategies in our database with 90%+ success rates. Key patterns: early stakeholder engagement (+12% success), weekly progress reviews (+8% efficiency), and risk-based resource allocation (+15% ROI). Would you like detailed analysis?",
+                    highlightSection: 'overview-section'
+                };
+            }
+            
+            // Default response
+            return {
+                message: "I understand you want to optimize your strategy. I can help with timeline adjustments, risk assessments, objective modifications, progress reports, scenario analysis, and best practice recommendations. What specific area would you like to focus on?",
+                highlightSection: null
+            };
+        }
+
+        function highlightSection(sectionId) {
+            // Remove previous highlights
+            document.querySelectorAll('.section.highlighted, .objective-card.highlighted').forEach(el => {
+                el.classList.remove('highlighted');
+            });
+            
+            // Add new highlight
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('highlighted');
+                section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Remove highlight after 5 seconds
+                setTimeout(() => {
+                    section.classList.remove('highlighted');
+                }, 5000);
+            }
+        }
+
+        function updateBoardContent(update) {
+            // Simulate real-time content updates based on AI suggestions
+            if (update.type === 'timeline' && update.action === 'optimize') {
+                // Could update timeline items here
+                console.log('Timeline optimized');
+            } else if (update.type === 'risk' && update.action === 'add') {
+                // Could add new risk items here
+                console.log('Risk added');
+            } else if (update.type === 'objective' && update.action === 'optimize') {
+                // Could update objective progress here
+                console.log('Objectives optimized');
+            }
+        }
+
+        // Enter key support for chat
+        document.getElementById('chat-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Auto-resize textarea
+        document.getElementById('chat-input').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBoardData();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+The Enterprise Command Center: Vision
+and Design
+The Command Center is designed as a centralized, unified, and intelligent system to provide
+unprecedented visibility and control over how work gets done across an enterprise, functioning
+as the "nervous system" of a modern organization. It aims to accelerate decision-making and
+compress the time between sensing an issue and taking optimal action.
+Here's a breakdown of its design:
+1. Core Deliverable and Overall Vision:
+• The Command Center is a core deliverable under the broader Agentic Enterprise vision.
+• It's more than just a dashboard; it's envisioned as a "living, breathing interface to the enterprise
+itself".
+• Its high-level goal is to enable real-time decision-making, unified insights, and operational
+agility for various personas and users.
+• It also serves as a marketing "wall board"—a high-level, visual representation of the Agentic
+Enterprise for key stakeholders like the CEO and LOB leaders.
+2. Key Design Principles & Pillars:
+• Role-based Command Center: Tailored for executive visibility and other specific roles.
+• Ontology-driven framework: A flexible framework for knowledge, goals, and processes that
+defines real-world business relationships and drives AI goals and feedback loops.
+• Slack as the engagement layer: Prioritizes Slack for most end-user interaction, functioning as
+a conversational canvas for people and agents to collaborate, and a "front door" to the Agentic
+Enterprise, especially for mobile use. However, it's not Slack-only; a Lightning equivalent UX is
+planned.
+• Real-time feedback and agent learning loops: Continuously incorporates feedback to improve
+operations and agent performance.
+• Internal and external agent orchestration: Designed to coordinate both human and AI agents
+across various systems.
+• Active Communication, Live, Transparent, Actionability, Collaboration, Automation, and
+Agentic are also guiding principles.
+3. Layered Architecture for User Behavior: The Command Center's design is informed by
+interconnected layers that support distinct types of human behavior as people and agents work
+across the enterprise:
+• Ontology Layer: The foundational "graph" defining organizational units, processes, resources,
+goals, KPIs, assets, personnel, and knowledge. It's designed to be AI-read/write friendly, directly
+influencing AI goals and feedback loops.
+• Exploratory Layer: Provides UIs for understanding the performance of humans and agents and
+deriving operational and strategic insights. This includes the Unified Command Center, CSI
+(Customer Signals Intelligence), and Agentforce Interaction Explorer.
+• Operational Layer: Encompasses products and tools where shared work between humans and
+AI gets done. This involves tracking and managing live conversations, work items, and tasks
+
+with various visualizations like Kanban boards, wall dashboards, and alerts. Examples include
+OmniSupervisor for real-time operations.
+• Learning Layer: Focuses on explicit and implicit feedback, with AI-powered recommendations
+for improvement across operational, experience, and ontological layers. It captures human input
+and aggregates it into AI recommendations to enhance agent performance and process design.
+• Refinement Layer: Offers AI-assisted experiences to improve at both strategic (ontological)
+and operational levels, acting like a strategic consultant for designing dashboards, metrics, and
+goals, or an implementation consultant for authoring processes, agent instructions, and building
+integrations.
+4. Unified Command Center Experience (Home Page): The Command Center is designed to be
+a Unified Command Center, a primary user interface to see, understand, and take action across
+the Agentic Enterprise. It flexes to many views for different users and use cases, driven by
+ontology to filter, focus, and adjust the UX. The "Home" view is crucial and aims to provide:
+• Conversational Search: Fully agentic, across all parts of the enterprise.
+• Voice-based and written conversational UX: With Agentforce acting as an assistant.
+• Watch list of health "Flags/Alerts": Proactively pushed across the entire enterprise (sales,
+service, marketing, HR, ops) and broader industry based on user priorities.
+• Spaces/Boards/Focus: Customized by users to monitor specific goals and dimensions of the
+business (e.g., a digital campaign's impact on service cases). These allow agents to reason
+across hierarchical goals connected through the ontology.
+• Stories/Casts: Voice readouts summarizing status or issues within a "Space," serving as a
+launch point into conversations with assistive AI.
+• Cards: Live on a focused Board, displaying KPIs and alerts tied to a board's tags, acting as
+launch points into Agentforce Studio and OmniSupervisor for agent, process, and operational
+performance tuning.
+5. Role-Based Customization: The design accounts for different personas, providing tailored
+views:
+• Executive (CEO/CXO): Needs a strategic, top-line view focusing on overall business health,
+financial, customer, and operational metrics. This includes predictive analytics, scenario
+planning, and executive alerts. The CEO view often starts on Slack Mobile.
+• Line of Business VP/Director: Requires performance monitoring and decision support, with
+deeper dives into departmental performance, operational efficiency, and resource allocation
+within their domain. This includes operational dashboards and tools for resource allocation
+planning.
+• Supervisor/Specialist/Doer Persona: Needs granular, task-level, and operational insights for
+immediate action, problem-solving, and adherence to procedures. This view features task
+queues, SLA monitors, knowledge bases, and AI-driven next-best actions. The team view often
+starts on Slack Desktop.
+6. Integration with Existing Tools and Data: The Command Center is not a replacement for
+existing operational tools like CSI or OmniSupervisor, but rather connects to and elevates these
+systems.
+• Customer Signals Intelligence (CSI): Integrated for analytical, strategic, and action-oriented
+overviews of how different parts of the business influence each other. It's powered by C360
+
+Suite, CSI, Data Cloud, and Agentforce, providing KPI summaries, predictive capabilities with
+"What-If" analysis, and operational actionability.
+• OmniSupervisor: Used for real-time operations management, including queue-based,
+worker-based, and stage-based views for "in the moment" low-latency call center work and
+general multi-stage work like order processing.
+• Agentforce Studio: Provides tools for agent performance and execution, including Interaction
+Explorer, Agent Builders, and Agentforce Analytics, allowing teams to fix issues by restructuring
+process maps or rebuilding agent flows.
+• Common Layer (Semantic Data Model, Goals, Ontology): This forms the underlying
+foundation, integrating data sources and enabling agents to understand and reason across
+customer tooling, technologies, processes, and business logic. The Command Center supports
+two presentation layers: Slack and Lightning, and two views: Kanban and List, being agnostic
+about the object type.
+In essence, the Command Center is designed to be a comprehensive, dynamic, and intelligent
+hub that seamlessly integrates data, AI, and human interaction across all levels of an
+organization, from strategic oversight to tactical execution.

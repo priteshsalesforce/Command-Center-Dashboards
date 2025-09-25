@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Center Dashboards</title>
+    <style>
+        body {
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background: #f3f3f3;
+            color: #181818;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        h1 {
+            color: #0176D3;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+        .dashboards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .dashboard-card {
+            background: #f8f9fa;
+            border: 1px solid #c9c7c5;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .dashboard-card h2 {
+            color: #0176D3;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        .dashboard-card p {
+            color: #706e6b;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            background: #0176D3;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #014486;
+        }
+        .description {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #706e6b;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enterprise Command Center</h1>
+        <p class="description">
+            Explore our comprehensive suite of executive and operational dashboards designed for modern enterprise management.
+        </p>
+        
+        <div class="dashboards">
+            <div class="dashboard-card">
+                <h2>CXO Executive Dashboard</h2>
+                <p>High-level executive view with key performance indicators and strategic insights.</p>
+                <a href="CXO-CC.html" class="btn">View Dashboard</a>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2>CXO Vision Center</h2>
+                <p>Strategic vision and long-term planning dashboard for C-suite executives.</p>
+                <a href="CXO-Vision CC.html" class="btn">View Dashboard</a>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2>Strategy Board Detail</h2>
+                <p>Detailed strategic planning and execution tracking interface.</p>
+                <a href="Strategy_Board_Detail.html" class="btn">View Dashboard</a>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2>Samsung CXO Vision</h2>
+                <p>Samsung-specific executive command center with tailored metrics.</p>
+                <a href="Samsung/Samsung-Vision CC-CXO.html" class="btn">View Dashboard</a>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2>Samsung Service VP</h2>
+                <p>Service operations dashboard designed for VP-level oversight.</p>
+                <a href="Samsung/Samsung-Vision CC-ServiceVP.html" class="btn">View Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
