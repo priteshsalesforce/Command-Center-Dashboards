@@ -9039,13 +9039,13 @@
             
             // Map strategy IDs to specific detail pages for Service VP context
             const strategyPages = {
-                1: 'Strategy_Board_Crisis_Recovery.html',
-                2: 'Strategy_Board_Service_Excellence.html', 
-                3: 'Strategy_Board_Customer_Recovery.html',
-                4: 'Strategy_Board_Process_Optimization.html'
+                1: '../Strategy_Board_Crisis_Recovery.html',
+                2: '../Strategy_Board_Service_Excellence.html', 
+                3: '../Strategy_Board_Customer_Recovery.html',
+                4: '../Strategy_Board_Process_Optimization.html'
             };
             
-            const pageUrl = strategyPages[strategyId] || 'Strategy_Board_Detail.html';
+            const pageUrl = strategyPages[strategyId] || '../Strategy_Board_Detail.html';
             
             // Open in new tab
             window.open(pageUrl, '_blank');
@@ -9056,13 +9056,13 @@
             console.log('Opening strategy board for type:', boardType);
             
             const boardPages = {
-                'customer-experience': 'Strategy_Board_Customer_Experience.html',
-                'revenue-protection': 'Strategy_Board_Revenue_Protection.html',
-                'support-ops': 'Strategy_Board_Support_Operations.html',
-                'crisis-recovery': 'Strategy_Board_Crisis_Recovery.html'
+                'customer-experience': '../Strategy_Board_Customer_Experience.html',
+                'revenue-protection': '../Strategy_Board_Revenue_Protection.html',
+                'support-ops': '../Strategy_Board_Support_Operations.html',
+                'crisis-recovery': '../Strategy_Board_Crisis_Recovery.html'
             };
             
-            const pageUrl = boardPages[boardType] || 'Strategy_Board_Detail.html';
+            const pageUrl = boardPages[boardType] || '../Strategy_Board_Detail.html';
             
             // Open in new tab
             window.open(pageUrl, '_blank');

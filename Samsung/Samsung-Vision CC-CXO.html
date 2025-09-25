@@ -8706,13 +8706,13 @@
             
             // Map strategy IDs to specific detail pages
             const strategyPages = {
-                1: 'Strategy_Board_FY25_Growth_Vision.html',
-                2: 'Strategy_Board_Customer_Experience.html', 
-                3: 'Strategy_Board_Digital_Innovation.html',
-                4: 'Strategy_Board_Operational_Excellence.html'
+                1: '../Strategy_Board_FY25_Growth_Vision.html',
+                2: '../Strategy_Board_Customer_Experience.html', 
+                3: '../Strategy_Board_Digital_Innovation.html',
+                4: '../Strategy_Board_Operational_Excellence.html'
             };
             
-            const pageUrl = strategyPages[strategyId] || 'Strategy_Board_Detail.html';
+            const pageUrl = strategyPages[strategyId] || '../Strategy_Board_Detail.html';
             
             // Open in new tab
             window.open(pageUrl, '_blank');
@@ -8723,12 +8723,12 @@
             console.log('Opening strategy board for type:', boardType);
             
             const boardPages = {
-                'customer-experience': 'Strategy_Board_Customer_Experience.html',
-                'revenue-protection': 'Strategy_Board_Revenue_Protection.html',
-                'support-ops': 'Strategy_Board_Support_Operations.html'
+                'customer-experience': '../Strategy_Board_Customer_Experience.html',
+                'revenue-protection': '../Strategy_Board_Revenue_Protection.html',
+                'support-ops': '../Strategy_Board_Support_Operations.html'
             };
             
-            const pageUrl = boardPages[boardType] || 'Strategy_Board_Detail.html';
+            const pageUrl = boardPages[boardType] || '../Strategy_Board_Detail.html';
             
             // Open in new tab
             window.open(pageUrl, '_blank');
