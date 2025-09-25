@@ -1592,6 +1592,17 @@
             background: var(--bg-primary);
         }
 
+        .metric-chart-container {
+            height: 60px;
+            margin: 12px 0 8px 0;
+            position: relative;
+        }
+
+        .metric-chart {
+            width: 100%;
+            height: 100%;
+        }
+
         .metric-card:focus {
             outline: 2px solid var(--slds-c-color-brand);
             outline-offset: 2px;
@@ -4773,6 +4784,9 @@
                                             <div class="metric-title">CUSTOMER SATISFACTION</div>
                                         </div>
                                         <div class="metric-value">2.1/5</div>
+                                        <div class="metric-chart-container">
+                                            <canvas id="chart-customer-satisfaction-vp" class="metric-chart"></canvas>
+                                        </div>
                                         <div class="metric-change negative">-50% vs target (4.2/5)</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
                                     </div>
@@ -4785,6 +4799,9 @@
                                             <div class="metric-title">SERVICE RESOLUTION TIME</div>
                                         </div>
                                         <div class="metric-value">4.2 hrs</div>
+                                        <div class="metric-chart-container">
+                                            <canvas id="chart-service-resolution-vp" class="metric-chart"></canvas>
+                                        </div>
                                         <div class="metric-change negative">+45% increase</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
                                     </div>
@@ -4797,6 +4814,9 @@
                                             <div class="metric-title">FIRST CONTACT RESOLUTION</div>
                                         </div>
                                         <div class="metric-value">23%</div>
+                                        <div class="metric-chart-container">
+                                            <canvas id="chart-first-contact-resolution-vp" class="metric-chart"></canvas>
+                                        </div>
                                         <div class="metric-change negative">-55% vs target (78%)</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
                                     </div>
@@ -4810,6 +4830,9 @@
                                             <div class="metric-title">CUSTOMER LIFETIME VALUE</div>
                                         </div>
                                         <div class="metric-value">$10.3K</div>
+                                        <div class="metric-chart-container">
+                                            <canvas id="chart-customer-lifetime-value-vp" class="metric-chart"></canvas>
+                                        </div>
                                         <div class="metric-change negative">-15% decline</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
                                     </div>
@@ -4822,9 +4845,12 @@
                                             <div class="metric-title">NET PROMOTER SCORE</div>
                                         </div>
                                         <div class="metric-value">42</div>
+                                        <div class="metric-chart-container">
+                                            <canvas id="chart-nps-vp" class="metric-chart"></canvas>
+                                        </div>
                                         <div class="metric-change negative">-18 points</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
-                                </div>
+                                    </div>
 
                                     <!-- Critical Customer Signal Metrics -->
                                     <div class="metric-card clickable-metric" data-metric="enterprise-escalations" onclick="showPropagation('enterprise-escalations')">
@@ -4835,6 +4861,9 @@
                                             <div class="metric-title">ENTERPRISE ESCALATIONS</div>
                                         </div>
                                         <div class="metric-value">47</div>
+                                        <div class="metric-chart-container">
+                                            <canvas id="chart-enterprise-escalations-vp" class="metric-chart"></canvas>
+                                        </div>
                                         <div class="metric-change negative">+156% this week</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
                                     </div>
@@ -4848,6 +4877,9 @@
                                             <div class="metric-title">CHURN RISK ACCOUNTS</div>
                                         </div>
                                         <div class="metric-value">23</div>
+                                        <div class="metric-chart-container">
+                                            <canvas id="chart-churn-risk-vp" class="metric-chart"></canvas>
+                                        </div>
                                         <div class="metric-change negative">$4.2M ARR at risk</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
                                     </div>
@@ -4861,6 +4893,9 @@
                                             <div class="metric-title">SOCIAL SENTIMENT</div>
                                         </div>
                                         <div class="metric-value">-34%</div>
+                                        <div class="metric-chart-container">
+                                            <canvas id="chart-social-sentiment-vp" class="metric-chart"></canvas>
+                                        </div>
                                         <div class="metric-change negative">Trending negative</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
                                     </div>
@@ -8728,9 +8763,230 @@
                 });
             }
             
+            // Initialize Critical Metrics Charts
+            initializeServiceVPMetricCharts();
+            
             // Mark charts as initialized
             chartsInitialized = true;
             console.log('All Service VP charts initialized successfully!');
+        }
+
+        // Initialize Service VP Critical Metrics Charts
+        function initializeServiceVPMetricCharts() {
+            console.log('Initializing Service VP metric charts...');
+            
+            // Customer Satisfaction Chart (Severe decline trend)
+            const custSatCtx = document.getElementById('chart-customer-satisfaction-vp');
+            if (custSatCtx) {
+                new Chart(custSatCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            data: [4.2, 3.8, 3.4, 2.9, 2.5, 2.1],
+                            borderColor: '#DC2626',
+                            backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { display: false, min: 1.5, max: 4.5 },
+                            x: { display: false }
+                        },
+                        elements: { line: { borderWidth: 3 } }
+                    }
+                });
+            }
+
+            // Service Resolution Time Chart (Sharp increase)
+            const serviceResCtx = document.getElementById('chart-service-resolution-vp');
+            if (serviceResCtx) {
+                new Chart(serviceResCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['W1', 'W2', 'W3', 'W4'],
+                        datasets: [{
+                            data: [2.9, 3.2, 3.8, 4.2],
+                            backgroundColor: ['#FFA500', '#FF8C00', '#FF4500', '#DC2626'],
+                            borderRadius: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { display: false, min: 2, max: 5 },
+                            x: { display: false }
+                        }
+                    }
+                });
+            }
+
+            // First Contact Resolution Chart (Critical low percentage)
+            const fcrCtx = document.getElementById('chart-first-contact-resolution-vp');
+            if (fcrCtx) {
+                new Chart(fcrCtx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [23, 77],
+                            backgroundColor: ['#DC2626', '#E5E7EB'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '70%',
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            // Customer Lifetime Value Chart (Decline trend)
+            const clvCtx = document.getElementById('chart-customer-lifetime-value-vp');
+            if (clvCtx) {
+                new Chart(clvCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q1', 'Q2'],
+                        datasets: [{
+                            data: [12.1, 11.8, 11.5, 11.0, 10.7, 10.3],
+                            borderColor: '#DC2626',
+                            backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { display: false, min: 9, max: 13 },
+                            x: { display: false }
+                        },
+                        elements: { line: { borderWidth: 2 } }
+                    }
+                });
+            }
+
+            // Net Promoter Score Chart (Low score breakdown)
+            const npsCtx = document.getElementById('chart-nps-vp');
+            if (npsCtx) {
+                new Chart(npsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Detractors', 'Passives', 'Promoters'],
+                        datasets: [{
+                            data: [35, 23, 42],
+                            backgroundColor: ['#DC2626', '#FFA500', '#10B981']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { display: false },
+                            x: { display: false, max: 100 }
+                        }
+                    }
+                });
+            }
+
+            // Enterprise Escalations Chart (Dramatic spike)
+            const escalationsCtx = document.getElementById('chart-enterprise-escalations-vp');
+            if (escalationsCtx) {
+                new Chart(escalationsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            data: [12, 15, 18, 25, 35, 42, 47],
+                            borderColor: '#DC2626',
+                            backgroundColor: 'rgba(220, 38, 38, 0.2)',
+                            tension: 0.2,
+                            fill: true,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { display: false, min: 0, max: 50 },
+                            x: { display: false }
+                        },
+                        elements: { line: { borderWidth: 3 } }
+                    }
+                });
+            }
+
+            // Churn Risk Accounts Chart (High risk concentration)
+            const churnCtx = document.getElementById('chart-churn-risk-vp');
+            if (churnCtx) {
+                new Chart(churnCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Low', 'Medium', 'High', 'Critical'],
+                        datasets: [{
+                            data: [5, 8, 10, 23],
+                            backgroundColor: ['#10B981', '#FFA500', '#FF4500', '#DC2626']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { display: false, max: 25 },
+                            x: { display: false }
+                        }
+                    }
+                });
+            }
+
+            // Social Sentiment Chart (Severe negative trend)
+            const sentimentCtx = document.getElementById('chart-social-sentiment-vp');
+            if (sentimentCtx) {
+                new Chart(sentimentCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                        datasets: [{
+                            data: [15, 5, -15, -34],
+                            borderColor: '#DC2626',
+                            backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { display: false, min: -40, max: 20 },
+                            x: { display: false }
+                        },
+                        elements: { line: { borderWidth: 2 } }
+                    }
+                });
+            }
+
+            console.log('Service VP metric charts initialized successfully!');
         }
 
         // Enhanced Agentforce Chat Functions
