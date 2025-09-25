@@ -5014,17 +5014,17 @@
                                     <div class="board-reference">
                                         <div class="board-name">Customer Experience Excellence</div>
                                         <div class="board-status">In Progress</div>
-                                        <button class="board-link" data-board="customer-experience">View Board</button>
+                                        <button class="board-link" onclick="openStrategyBoard('customer-experience')">View Board</button>
                                     </div>
                                     <div class="board-reference">
                                         <div class="board-name">Q4 Revenue Protection</div>
                                         <div class="board-status">Active</div>
-                                        <button class="board-link" data-board="revenue-protection">View Board</button>
+                                        <button class="board-link" onclick="openStrategyBoard('revenue-protection')">View Board</button>
                                     </div>
                                     <div class="board-reference">
                                         <div class="board-name">Support Operations Optimization</div>
                                         <div class="board-status">Planning</div>
-                                        <button class="board-link" data-board="support-ops">View Board</button>
+                                        <button class="board-link" onclick="openStrategyBoard('support-ops')">View Board</button>
                                     </div>
                                 </div>
                                 
@@ -8699,6 +8699,40 @@
             console.log('Metric charts initialized successfully!');
         }
 
+
+        // Strategy Board Detail Functions
+        function openStrategyBoardDetail(strategyId) {
+            console.log('Opening strategy board detail for ID:', strategyId);
+            
+            // Map strategy IDs to specific detail pages
+            const strategyPages = {
+                1: 'Strategy_Board_FY25_Growth_Vision.html',
+                2: 'Strategy_Board_Customer_Experience.html', 
+                3: 'Strategy_Board_Digital_Innovation.html',
+                4: 'Strategy_Board_Operational_Excellence.html'
+            };
+            
+            const pageUrl = strategyPages[strategyId] || 'Strategy_Board_Detail.html';
+            
+            // Open in new tab
+            window.open(pageUrl, '_blank');
+        }
+        
+        // Function for View Board buttons
+        function openStrategyBoard(boardType) {
+            console.log('Opening strategy board for type:', boardType);
+            
+            const boardPages = {
+                'customer-experience': 'Strategy_Board_Customer_Experience.html',
+                'revenue-protection': 'Strategy_Board_Revenue_Protection.html',
+                'support-ops': 'Strategy_Board_Support_Operations.html'
+            };
+            
+            const pageUrl = boardPages[boardType] || 'Strategy_Board_Detail.html';
+            
+            // Open in new tab
+            window.open(pageUrl, '_blank');
+        }
 
         // Enhanced Agentforce Chat Functions
         var enhancedChatHistory = [];

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RF-9000X Crisis Recovery - Strategy Board</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f3f3f3;
+            --text-primary: #181818;
+            --text-secondary: #706e6b;
+            --text-weak: #706e6b;
+            --border-primary: #c9c7c5;
+            --border-secondary: #dddbda;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-medium: rgba(0,0,0,0.15);
+            --slds-c-color-brand: #0176d3;
+            --slds-c-color-success: #04844b;
+            --slds-c-color-warning: #ffb71b;
+            --slds-c-color-error: #c23934;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow: hidden;
+        }
+
+        .strategy-editor-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .strategy-board-panel {
+            flex: 1;
+            background: var(--bg-primary);
+            overflow-y: auto;
+            border-right: 1px solid var(--border-primary);
+        }
+
+        .agentforce-chat-panel {
+            width: 400px;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-primary);
+        }
+
+        .board-header {
+            background: linear-gradient(135deg, var(--slds-c-color-error) 0%, #E74C3C 100%);
+            color: white;
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .board-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .board-meta-info {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            opacity: 0.9;
+        }
+
+        .meta-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .board-content {
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .objective-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .objective-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: var(--bg-tertiary);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--slds-c-color-brand);
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.success { background: var(--slds-c-color-success); }
+        .progress-fill.warning { background: var(--slds-c-color-warning); }
+        .progress-fill.error { background: var(--slds-c-color-error); }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.on-track {
+            background: rgba(4, 132, 75, 0.1);
+            color: var(--slds-c-color-success);
+        }
+
+        .status-badge.needs-attention {
+            background: rgba(255, 183, 27, 0.1);
+            color: var(--slds-c-color-warning);
+        }
+
+        .status-badge.behind {
+            background: rgba(194, 57, 52, 0.1);
+            color: var(--slds-c-color-error);
+        }
+
+        .status-badge.critical {
+            background: rgba(194, 57, 52, 0.2);
+            color: var(--slds-c-color-error);
+            font-weight: 700;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slds-c-color-error);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .initiatives-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .initiative-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .initiative-details h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .initiative-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .risks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .risk-item {
+            background: rgba(194, 57, 52, 0.05);
+            border-left: 4px solid var(--slds-c-color-error);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .risk-item h4 {
+            color: var(--slds-c-color-error);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Agentforce Chat Panel Styles */
+        .chat-header {
+            background: var(--slds-c-color-brand);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 12px;
+            max-width: 85%;
+        }
+
+        .message.user {
+            background: var(--slds-c-color-brand);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.agent {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border-secondary);
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--slds-c-color-brand);
+        }
+    </style>
+</head>
+<body>
+    <div class="strategy-editor-container">
+        <!-- Strategy Board Panel -->
+        <div class="strategy-board-panel">
+            <div class="board-header">
+                <h1 class="board-title">🚨 RF-9000X Crisis Recovery</h1>
+                <div class="board-meta-info">
+                    <span class="meta-item">Critical Priority</span>
+                    <span class="meta-item">Q4 FY25</span>
+                    <span class="meta-item">45% Complete</span>
+                    <span class="meta-item">At Risk</span>
+                </div>
+            </div>
+
+            <div class="board-content">
+                <!-- Crisis Overview -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">🎯</span>
+                        Crisis Recovery Mission
+                    </h2>
+                    <p>Execute comprehensive recovery plan for RF-9000X product defects affecting 15,000+ customers. Restore customer confidence, minimize churn, and prevent long-term brand damage while maintaining operational excellence.</p>
+                </div>
+
+                <!-- Key Recovery Metrics -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">📊</span>
+                        Recovery Metrics
+                    </h2>
+                    <div class="objectives-grid">
+                        <div class="objective-card">
+                            <div class="objective-title">Customer Satisfaction</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill error" style="width: 42%"></div>
+                            </div>
+                            <div class="metric-value">2.1/5</div>
+                            <div class="metric-label">Current / 4.2 Target</div>
+                            <span class="status-badge critical">Critical</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Issue Resolution Rate</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 65%"></div>
+                            </div>
+                            <div class="metric-value">65%</div>
+                            <div class="metric-label">Current / 95% Target</div>
+                            <span class="status-badge needs-attention">Behind</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Customer Retention</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill error" style="width: 72%"></div>
+                            </div>
+                            <div class="metric-value">72%</div>
+                            <div class="metric-label">Current / 90% Target</div>
+                            <span class="status-badge critical">Critical</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Response Time</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill error" style="width: 35%"></div>
+                            </div>
+                            <div class="metric-value">8.5hrs</div>
+                            <div class="metric-label">Current / 2hrs Target</div>
+                            <span class="status-badge critical">Critical</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recovery Initiatives -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚡</span>
+                        Recovery Initiatives
+                    </h2>
+                    <div class="initiatives-list">
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Emergency Product Recall & Replacement</h4>
+                                <p>Immediate recall of defective units and expedited replacement program</p>
+                            </div>
+                            <span class="status-badge on-track">In Progress</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Dedicated Crisis Response Team</h4>
+                                <p>24/7 specialized support team for affected customers</p>
+                            </div>
+                            <span class="status-badge on-track">Active</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Customer Compensation Program</h4>
+                                <p>Financial compensation and service credits for impacted customers</p>
+                            </div>
+                            <span class="status-badge needs-attention">Behind Schedule</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Quality Assurance Overhaul</h4>
+                                <p>Complete review and enhancement of QA processes</p>
+                            </div>
+                            <span class="status-badge on-track">Planning</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Communication & Transparency Campaign</h4>
+                                <p>Proactive customer communication and public relations management</p>
+                            </div>
+                            <span class="status-badge on-track">Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Critical Actions -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚠️</span>
+                        Immediate Actions Required
+                    </h2>
+                    <div class="risks-list">
+                        <div class="risk-item">
+                            <h4>Accelerate Replacement Timeline</h4>
+                            <p><strong>Action:</strong> Reduce replacement delivery from 7 days to 2 days</p>
+                            <p><strong>Owner:</strong> Supply Chain & Logistics Team</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Expand Support Capacity</h4>
+                            <p><strong>Action:</strong> Add 50 additional support agents by end of week</p>
+                            <p><strong>Owner:</strong> HR & Operations Team</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Executive Communication</h4>
+                            <p><strong>Action:</strong> CEO public statement and customer video message</p>
+                            <p><strong>Owner:</strong> Communications Team</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Legal & Regulatory Compliance</h4>
+                            <p><strong>Action:</strong> Ensure all regulatory requirements are met</p>
+                            <p><strong>Owner:</strong> Legal & Compliance Team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recovery Timeline -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">📅</span>
+                        Recovery Timeline
+                    </h2>
+                    <div class="initiatives-list">
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Week 1-2: Crisis Containment</h4>
+                                <p>Stop shipments, recall defective units, establish crisis response</p>
+                            </div>
+                            <span class="status-badge on-track">Completed</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Week 3-4: Customer Recovery</h4>
+                                <p>Accelerate replacements, implement compensation program</p>
+                            </div>
+                            <span class="status-badge needs-attention">In Progress</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Week 5-8: Trust Rebuilding</h4>
+                                <p>Quality improvements, transparent communication, NPS recovery</p>
+                            </div>
+                            <span class="status-badge behind">Pending</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Week 9-12: Process Enhancement</h4>
+                                <p>Long-term quality improvements, prevention measures</p>
+                            </div>
+                            <span class="status-badge behind">Pending</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentforce Chat Panel -->
+        <div class="agentforce-chat-panel">
+            <div class="chat-header">
+                <span>🤖</span>
+                Crisis Recovery Assistant
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message agent">
+                    <strong>Crisis Recovery Assistant:</strong><br>
+                    I'm monitoring the RF-9000X crisis recovery in real-time. Current status shows critical metrics that need immediate attention.
+                </div>
+                
+                <div class="message agent">
+                    <strong>Urgent Priorities:</strong><br>
+                    • CSAT at critical level (2.1/5) - needs immediate action<br>
+                    • Response time 4x target (8.5hrs vs 2hrs)<br>
+                    • Customer retention at risk (72% vs 90% target)<br><br>
+                    I recommend focusing on support capacity and replacement acceleration. Need specific action plans?
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" placeholder="Ask about crisis recovery strategy..." id="chat-input">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple chat functionality
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const input = e.target;
+                const message = input.value.trim();
+                
+                if (message) {
+                    // Add user message
+                    const chatMessages = document.getElementById('chat-messages');
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message user';
+                    userMessage.innerHTML = `<strong>You:</strong><br>${message}`;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    input.value = '';
+                    
+                    // Simulate agent response
+                    setTimeout(() => {
+                        const agentMessage = document.createElement('div');
+                        agentMessage.className = 'message agent';
+                        agentMessage.innerHTML = `<strong>Crisis Recovery Assistant:</strong><br>Analyzing "${message}" in context of RF-9000X crisis. This is a critical situation requiring immediate action. Based on current metrics, I recommend prioritizing customer communication and support capacity expansion. Would you like detailed action plans?`;
+                        chatMessages.appendChild(agentMessage);
+                        
+                        // Scroll to bottom
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

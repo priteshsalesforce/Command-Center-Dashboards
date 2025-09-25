@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q4 Revenue Protection - Strategy Board</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f3f3f3;
+            --text-primary: #181818;
+            --text-secondary: #706e6b;
+            --text-weak: #706e6b;
+            --border-primary: #c9c7c5;
+            --border-secondary: #dddbda;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-medium: rgba(0,0,0,0.15);
+            --slds-c-color-brand: #0176d3;
+            --slds-c-color-success: #04844b;
+            --slds-c-color-warning: #ffb71b;
+            --slds-c-color-error: #c23934;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow: hidden;
+        }
+
+        .strategy-editor-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .strategy-board-panel {
+            flex: 1;
+            background: var(--bg-primary);
+            overflow-y: auto;
+            border-right: 1px solid var(--border-primary);
+        }
+
+        .agentforce-chat-panel {
+            width: 400px;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-primary);
+        }
+
+        .board-header {
+            background: linear-gradient(135deg, var(--slds-c-color-brand) 0%, #2980B9 100%);
+            color: white;
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .board-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .board-meta-info {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            opacity: 0.9;
+        }
+
+        .meta-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .board-content {
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .objective-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .objective-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: var(--bg-tertiary);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--slds-c-color-brand);
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.success { background: var(--slds-c-color-success); }
+        .progress-fill.warning { background: var(--slds-c-color-warning); }
+        .progress-fill.error { background: var(--slds-c-color-error); }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.on-track {
+            background: rgba(4, 132, 75, 0.1);
+            color: var(--slds-c-color-success);
+        }
+
+        .status-badge.needs-attention {
+            background: rgba(255, 183, 27, 0.1);
+            color: var(--slds-c-color-warning);
+        }
+
+        .status-badge.behind {
+            background: rgba(194, 57, 52, 0.1);
+            color: var(--slds-c-color-error);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slds-c-color-brand);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .initiatives-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .initiative-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .initiative-details h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .initiative-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .risks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .risk-item {
+            background: rgba(194, 57, 52, 0.05);
+            border-left: 4px solid var(--slds-c-color-error);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .risk-item h4 {
+            color: var(--slds-c-color-error);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Agentforce Chat Panel Styles */
+        .chat-header {
+            background: var(--slds-c-color-brand);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 12px;
+            max-width: 85%;
+        }
+
+        .message.user {
+            background: var(--slds-c-color-brand);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.agent {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border-secondary);
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--slds-c-color-brand);
+        }
+    </style>
+</head>
+<body>
+    <div class="strategy-editor-container">
+        <!-- Strategy Board Panel -->
+        <div class="strategy-board-panel">
+            <div class="board-header">
+                <h1 class="board-title">🛡️ Q4 Revenue Protection</h1>
+                <div class="board-meta-info">
+                    <span class="meta-item">CFO Initiative</span>
+                    <span class="meta-item">Q4 FY25</span>
+                    <span class="meta-item">82% Complete</span>
+                    <span class="meta-item">Active</span>
+                </div>
+            </div>
+
+            <div class="board-content">
+                <!-- Vision Statement -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">🎯</span>
+                        Protection Strategy
+                    </h2>
+                    <p>Safeguard Q4 revenue targets despite RF-9000X crisis impact. Implement defensive measures to minimize customer churn, accelerate collection cycles, and diversify revenue streams to maintain $85M quarterly target.</p>
+                </div>
+
+                <!-- Key Objectives -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">📊</span>
+                        Protection Metrics
+                    </h2>
+                    <div class="objectives-grid">
+                        <div class="objective-card">
+                            <div class="objective-title">Revenue Target</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 82%"></div>
+                            </div>
+                            <div class="metric-value">$69.7M</div>
+                            <div class="metric-label">Current / $85M Target</div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Customer Retention</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 88%"></div>
+                            </div>
+                            <div class="metric-value">88%</div>
+                            <div class="metric-label">Current / 95% Target</div>
+                            <span class="status-badge needs-attention">Needs Attention</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Collection Efficiency</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 94%"></div>
+                            </div>
+                            <div class="metric-value">94%</div>
+                            <div class="metric-label">Current / 96% Target</div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Pipeline Health</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 76%"></div>
+                            </div>
+                            <div class="metric-value">$92M</div>
+                            <div class="metric-label">Current / $120M Target</div>
+                            <span class="status-badge needs-attention">Behind</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Protection Initiatives -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚡</span>
+                        Protection Initiatives
+                    </h2>
+                    <div class="initiatives-list">
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Customer Retention Program</h4>
+                                <p>Proactive outreach to at-risk accounts with special offers and support</p>
+                            </div>
+                            <span class="status-badge on-track">Active</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Accelerated Collections</h4>
+                                <p>Fast-track payment collection and reduce outstanding receivables</p>
+                            </div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Alternative Revenue Streams</h4>
+                                <p>Launch new service offerings and expand existing product lines</p>
+                            </div>
+                            <span class="status-badge needs-attention">Behind Schedule</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Strategic Partnerships</h4>
+                                <p>Accelerate partner channel revenue and joint go-to-market initiatives</p>
+                            </div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Crisis Communication Plan</h4>
+                                <p>Transparent communication to maintain customer confidence</p>
+                            </div>
+                            <span class="status-badge on-track">Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Risks -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚠️</span>
+                        Revenue Risk Mitigation
+                    </h2>
+                    <div class="risks-list">
+                        <div class="risk-item">
+                            <h4>RF-9000X Customer Churn</h4>
+                            <p><strong>Risk:</strong> Affected customers canceling contracts and subscriptions</p>
+                            <p><strong>Mitigation:</strong> Compensation packages and contract amendments</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>New Deal Delays</h4>
+                            <p><strong>Risk:</strong> Prospects postponing decisions due to crisis concerns</p>
+                            <p><strong>Mitigation:</strong> Enhanced sales support and proof of stability</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Payment Delays</h4>
+                            <p><strong>Risk:</strong> Customers delaying payments citing product issues</p>
+                            <p><strong>Mitigation:</strong> Flexible payment terms and proactive collections</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Market Confidence Loss</h4>
+                            <p><strong>Risk:</strong> Overall market perception affecting all product lines</p>
+                            <p><strong>Mitigation:</strong> PR campaign highlighting non-affected products</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Forecast -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">📈</span>
+                        Q4 Revenue Forecast
+                    </h2>
+                    <div class="initiatives-list">
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Existing Contracts</h4>
+                                <p>Recurring revenue from current customer base</p>
+                            </div>
+                            <div class="metric-value" style="font-size: 1.2rem;">$52M</div>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>New Sales Pipeline</h4>
+                                <p>Projected closed deals from current opportunities</p>
+                            </div>
+                            <div class="metric-value" style="font-size: 1.2rem;">$18M</div>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Service & Support Revenue</h4>
+                                <p>Professional services and extended support contracts</p>
+                            </div>
+                            <div class="metric-value" style="font-size: 1.2rem;">$12M</div>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Partnership Revenue</h4>
+                                <p>Channel partner and reseller contributions</p>
+                            </div>
+                            <div class="metric-value" style="font-size: 1.2rem;">$8M</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentforce Chat Panel -->
+        <div class="agentforce-chat-panel">
+            <div class="chat-header">
+                <span>🤖</span>
+                Revenue Protection Assistant
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message agent">
+                    <strong>Revenue Protection Assistant:</strong><br>
+                    Monitoring Q4 revenue protection strategy. Current trajectory shows we're 82% to target with key risks identified.
+                </div>
+                
+                <div class="message agent">
+                    <strong>Strategic Focus:</strong><br>
+                    • Revenue target achievable ($69.7M of $85M)<br>
+                    • Customer retention needs attention (88% vs 95%)<br>
+                    • Pipeline health behind target ($92M vs $120M)<br><br>
+                    Priority: Accelerate retention programs and pipeline conversion. Need detailed action plans?
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" placeholder="Ask about revenue protection strategy..." id="chat-input">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple chat functionality
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const input = e.target;
+                const message = input.value.trim();
+                
+                if (message) {
+                    // Add user message
+                    const chatMessages = document.getElementById('chat-messages');
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message user';
+                    userMessage.innerHTML = `<strong>You:</strong><br>${message}`;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    input.value = '';
+                    
+                    // Simulate agent response
+                    setTimeout(() => {
+                        const agentMessage = document.createElement('div');
+                        agentMessage.className = 'message agent';
+                        agentMessage.innerHTML = `<strong>Revenue Protection Assistant:</strong><br>Analyzing "${message}" for Q4 revenue protection. Given the RF-9000X crisis impact, I recommend focusing on customer retention and accelerated collections. The revenue forecast shows we can still meet targets with proper execution. What specific area needs attention?`;
+                        chatMessages.appendChild(agentMessage);
+                        
+                        // Scroll to bottom
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

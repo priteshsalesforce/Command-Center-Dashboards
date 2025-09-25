@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Experience Excellence - Strategy Board</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f3f3f3;
+            --text-primary: #181818;
+            --text-secondary: #706e6b;
+            --text-weak: #706e6b;
+            --border-primary: #c9c7c5;
+            --border-secondary: #dddbda;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-medium: rgba(0,0,0,0.15);
+            --slds-c-color-brand: #0176d3;
+            --slds-c-color-success: #04844b;
+            --slds-c-color-warning: #ffb71b;
+            --slds-c-color-error: #c23934;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow: hidden;
+        }
+
+        .strategy-editor-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .strategy-board-panel {
+            flex: 1;
+            background: var(--bg-primary);
+            overflow-y: auto;
+            border-right: 1px solid var(--border-primary);
+        }
+
+        .agentforce-chat-panel {
+            width: 400px;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-primary);
+        }
+
+        .board-header {
+            background: linear-gradient(135deg, var(--slds-c-color-warning) 0%, #F39C12 100%);
+            color: white;
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .board-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .board-meta-info {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            opacity: 0.9;
+        }
+
+        .meta-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .board-content {
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .objective-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .objective-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: var(--bg-tertiary);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--slds-c-color-brand);
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.success { background: var(--slds-c-color-success); }
+        .progress-fill.warning { background: var(--slds-c-color-warning); }
+        .progress-fill.error { background: var(--slds-c-color-error); }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.on-track {
+            background: rgba(4, 132, 75, 0.1);
+            color: var(--slds-c-color-success);
+        }
+
+        .status-badge.needs-attention {
+            background: rgba(255, 183, 27, 0.1);
+            color: var(--slds-c-color-warning);
+        }
+
+        .status-badge.behind {
+            background: rgba(194, 57, 52, 0.1);
+            color: var(--slds-c-color-error);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slds-c-color-warning);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .initiatives-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .initiative-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .initiative-details h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .initiative-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .risks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .risk-item {
+            background: rgba(194, 57, 52, 0.05);
+            border-left: 4px solid var(--slds-c-color-error);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .risk-item h4 {
+            color: var(--slds-c-color-error);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Agentforce Chat Panel Styles */
+        .chat-header {
+            background: var(--slds-c-color-brand);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 12px;
+            max-width: 85%;
+        }
+
+        .message.user {
+            background: var(--slds-c-color-brand);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.agent {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border-secondary);
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--slds-c-color-brand);
+        }
+    </style>
+</head>
+<body>
+    <div class="strategy-editor-container">
+        <!-- Strategy Board Panel -->
+        <div class="strategy-board-panel">
+            <div class="board-header">
+                <h1 class="board-title">💫 Customer Experience Excellence</h1>
+                <div class="board-meta-info">
+                    <span class="meta-item">CMO Initiative</span>
+                    <span class="meta-item">Q2 FY25</span>
+                    <span class="meta-item">64% Complete</span>
+                    <span class="meta-item">Needs Attention</span>
+                </div>
+            </div>
+
+            <div class="board-content">
+                <!-- Vision Statement -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">🎯</span>
+                        Vision Statement
+                    </h2>
+                    <p>Transform Samsung into the industry leader for customer experience by achieving a 4.5/5 CSAT score, reducing support response times by 50%, and implementing AI-driven personalization across all customer touchpoints.</p>
+                </div>
+
+                <!-- Key Objectives -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">📊</span>
+                        Key Objectives
+                    </h2>
+                    <div class="objectives-grid">
+                        <div class="objective-card">
+                            <div class="objective-title">Customer Satisfaction</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 71%"></div>
+                            </div>
+                            <div class="metric-value">3.2/5</div>
+                            <div class="metric-label">Current / 4.5 Target</div>
+                            <span class="status-badge needs-attention">Needs Attention</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Response Time</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill error" style="width: 45%"></div>
+                            </div>
+                            <div class="metric-value">8.5hrs</div>
+                            <div class="metric-label">Current / 4hrs Target</div>
+                            <span class="status-badge behind">Behind</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">First Call Resolution</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 68%"></div>
+                            </div>
+                            <div class="metric-value">68%</div>
+                            <div class="metric-label">Current / 85% Target</div>
+                            <span class="status-badge needs-attention">Needs Attention</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Net Promoter Score</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 60%"></div>
+                            </div>
+                            <div class="metric-value">30</div>
+                            <div class="metric-label">Current / 50 Target</div>
+                            <span class="status-badge needs-attention">Needs Attention</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Initiatives -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚡</span>
+                        Strategic Initiatives
+                    </h2>
+                    <div class="initiatives-list">
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>AI-Powered Support Chatbot</h4>
+                                <p>Deploy intelligent chatbot to handle 60% of common customer inquiries</p>
+                            </div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Customer Success Platform</h4>
+                                <p>Implement comprehensive platform for proactive customer engagement</p>
+                            </div>
+                            <span class="status-badge needs-attention">Behind Schedule</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Omnichannel Experience</h4>
+                                <p>Unify customer experience across web, mobile, and support channels</p>
+                            </div>
+                            <span class="status-badge needs-attention">Behind Schedule</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Voice of Customer Program</h4>
+                                <p>Establish systematic feedback collection and response program</p>
+                            </div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Risks & Mitigation -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚠️</span>
+                        Key Risks & Mitigation
+                    </h2>
+                    <div class="risks-list">
+                        <div class="risk-item">
+                            <h4>RF-9000X Crisis Impact</h4>
+                            <p><strong>Risk:</strong> Ongoing product issues severely impacting customer satisfaction</p>
+                            <p><strong>Mitigation:</strong> Dedicated crisis response team and proactive customer communication</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Support Team Capacity</h4>
+                            <p><strong>Risk:</strong> Current support team unable to handle increased volume</p>
+                            <p><strong>Mitigation:</strong> Hire additional support staff and implement self-service options</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Technology Integration Delays</h4>
+                            <p><strong>Risk:</strong> Platform integrations taking longer than expected</p>
+                            <p><strong>Mitigation:</strong> Engage external consultants and prioritize critical features</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Customer Churn Acceleration</h4>
+                            <p><strong>Risk:</strong> Dissatisfied customers leaving for competitors</p>
+                            <p><strong>Mitigation:</strong> Implement retention programs and personalized recovery plans</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentforce Chat Panel -->
+        <div class="agentforce-chat-panel">
+            <div class="chat-header">
+                <span>🤖</span>
+                CX Strategy Assistant
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message agent">
+                    <strong>CX Strategy Assistant:</strong><br>
+                    Welcome to the Customer Experience Excellence strategy board. I can see several areas that need immediate attention, particularly around the RF-9000X crisis impact.
+                </div>
+                
+                <div class="message agent">
+                    <strong>Critical Insights:</strong><br>
+                    • CSAT is significantly below target (3.2/5 vs 4.5/5)<br>
+                    • Response times are double the target (8.5hrs vs 4hrs)<br>
+                    • RF-9000X crisis is the primary driver of poor metrics<br><br>
+                    I recommend focusing on crisis response and support capacity immediately. Would you like specific action plans?
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" placeholder="Ask about customer experience strategy..." id="chat-input">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple chat functionality
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const input = e.target;
+                const message = input.value.trim();
+                
+                if (message) {
+                    // Add user message
+                    const chatMessages = document.getElementById('chat-messages');
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message user';
+                    userMessage.innerHTML = `<strong>You:</strong><br>${message}`;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    input.value = '';
+                    
+                    // Simulate agent response
+                    setTimeout(() => {
+                        const agentMessage = document.createElement('div');
+                        agentMessage.className = 'message agent';
+                        agentMessage.innerHTML = `<strong>CX Strategy Assistant:</strong><br>Based on the Customer Experience Excellence data, I can provide insights about "${message}". The RF-9000X crisis is significantly impacting our customer experience metrics. Would you like me to suggest specific recovery strategies?`;
+                        chatMessages.appendChild(agentMessage);
+                        
+                        // Scroll to bottom
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

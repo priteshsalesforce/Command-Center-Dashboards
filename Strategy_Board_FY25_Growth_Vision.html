@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FY25 Growth Vision - Strategy Board</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f3f3f3;
+            --text-primary: #181818;
+            --text-secondary: #706e6b;
+            --text-weak: #706e6b;
+            --border-primary: #c9c7c5;
+            --border-secondary: #dddbda;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-medium: rgba(0,0,0,0.15);
+            --slds-c-color-brand: #0176d3;
+            --slds-c-color-success: #04844b;
+            --slds-c-color-warning: #ffb71b;
+            --slds-c-color-error: #c23934;
+        }
+
+        body {
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow: hidden;
+        }
+
+        .strategy-editor-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .strategy-board-panel {
+            flex: 1;
+            background: var(--bg-primary);
+            overflow-y: auto;
+            border-right: 1px solid var(--border-primary);
+        }
+
+        .agentforce-chat-panel {
+            width: 400px;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-primary);
+        }
+
+        .board-header {
+            background: linear-gradient(135deg, var(--slds-c-color-success) 0%, #2ECC71 100%);
+            color: white;
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .board-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .board-meta-info {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            opacity: 0.9;
+        }
+
+        .meta-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .board-content {
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .objective-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .objective-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: var(--bg-tertiary);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--slds-c-color-brand);
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.success { background: var(--slds-c-color-success); }
+        .progress-fill.warning { background: var(--slds-c-color-warning); }
+        .progress-fill.error { background: var(--slds-c-color-error); }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-badge.on-track {
+            background: rgba(4, 132, 75, 0.1);
+            color: var(--slds-c-color-success);
+        }
+
+        .status-badge.needs-attention {
+            background: rgba(255, 183, 27, 0.1);
+            color: var(--slds-c-color-warning);
+        }
+
+        .status-badge.behind {
+            background: rgba(194, 57, 52, 0.1);
+            color: var(--slds-c-color-error);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slds-c-color-success);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .initiatives-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .initiative-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .initiative-details h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .initiative-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .risks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .risk-item {
+            background: rgba(194, 57, 52, 0.05);
+            border-left: 4px solid var(--slds-c-color-error);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .risk-item h4 {
+            color: var(--slds-c-color-error);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Agentforce Chat Panel Styles */
+        .chat-header {
+            background: var(--slds-c-color-brand);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 12px;
+            max-width: 85%;
+        }
+
+        .message.user {
+            background: var(--slds-c-color-brand);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.agent {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-secondary);
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border-secondary);
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--slds-c-color-brand);
+        }
+    </style>
+</head>
+<body>
+    <div class="strategy-editor-container">
+        <!-- Strategy Board Panel -->
+        <div class="strategy-board-panel">
+            <div class="board-header">
+                <h1 class="board-title">🚀 FY25 Growth Vision</h1>
+                <div class="board-meta-info">
+                    <span class="meta-item">CEO Initiative</span>
+                    <span class="meta-item">Q4 FY25</span>
+                    <span class="meta-item">78% Complete</span>
+                    <span class="meta-item">On Track</span>
+                </div>
+            </div>
+
+            <div class="board-content">
+                <!-- Vision Statement -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">🎯</span>
+                        Vision Statement
+                    </h2>
+                    <p>Drive sustainable revenue growth to $100M by Q4 FY25 through strategic market expansion, customer experience excellence, and innovative product offerings that position Samsung as the market leader in enterprise solutions.</p>
+                </div>
+
+                <!-- Key Objectives -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">📊</span>
+                        Key Objectives
+                    </h2>
+                    <div class="objectives-grid">
+                        <div class="objective-card">
+                            <div class="objective-title">Revenue Target</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 78%"></div>
+                            </div>
+                            <div class="metric-value">$78M</div>
+                            <div class="metric-label">Current / $100M Target</div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Market Share Growth</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 85%"></div>
+                            </div>
+                            <div class="metric-value">17%</div>
+                            <div class="metric-label">Current / 20% Target</div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Customer Acquisition</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 65%"></div>
+                            </div>
+                            <div class="metric-value">650</div>
+                            <div class="metric-label">Current / 1000 Target</div>
+                            <span class="status-badge needs-attention">Needs Attention</span>
+                        </div>
+
+                        <div class="objective-card">
+                            <div class="objective-title">Product Innovation Index</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 92%"></div>
+                            </div>
+                            <div class="metric-value">4.6</div>
+                            <div class="metric-label">Current / 5.0 Target</div>
+                            <span class="status-badge on-track">Exceeding</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Initiatives -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚡</span>
+                        Strategic Initiatives
+                    </h2>
+                    <div class="initiatives-list">
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Enterprise Cloud Solutions Launch</h4>
+                                <p>Launch next-generation cloud platform targeting Fortune 500 companies</p>
+                            </div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Global Market Expansion</h4>
+                                <p>Enter 3 new international markets with localized offerings</p>
+                            </div>
+                            <span class="status-badge on-track">On Track</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>Customer Success Program</h4>
+                                <p>Implement comprehensive customer success framework to reduce churn</p>
+                            </div>
+                            <span class="status-badge needs-attention">Behind Schedule</span>
+                        </div>
+
+                        <div class="initiative-item">
+                            <div class="initiative-details">
+                                <h4>AI-Powered Analytics Suite</h4>
+                                <p>Develop and launch AI analytics platform for business intelligence</p>
+                            </div>
+                            <span class="status-badge on-track">Ahead of Schedule</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Risks & Mitigation -->
+                <div class="section">
+                    <h2 class="section-title">
+                        <span class="section-icon">⚠️</span>
+                        Key Risks & Mitigation
+                    </h2>
+                    <div class="risks-list">
+                        <div class="risk-item">
+                            <h4>Market Competition Intensification</h4>
+                            <p><strong>Risk:</strong> New competitors entering market with aggressive pricing</p>
+                            <p><strong>Mitigation:</strong> Focus on value differentiation and customer relationships</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Customer Acquisition Slowdown</h4>
+                            <p><strong>Risk:</strong> Current acquisition rate may not meet Q4 targets</p>
+                            <p><strong>Mitigation:</strong> Increase marketing spend and launch referral program</p>
+                        </div>
+
+                        <div class="risk-item">
+                            <h4>Economic Uncertainty Impact</h4>
+                            <p><strong>Risk:</strong> Economic downturn affecting enterprise spending</p>
+                            <p><strong>Mitigation:</strong> Develop flexible pricing models and focus on ROI messaging</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentforce Chat Panel -->
+        <div class="agentforce-chat-panel">
+            <div class="chat-header">
+                <span>🤖</span>
+                Strategy Assistant
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message agent">
+                    <strong>Strategy Assistant:</strong><br>
+                    Welcome to the FY25 Growth Vision strategy board! I'm here to help you analyze progress, identify risks, and optimize your growth strategy. What would you like to explore?
+                </div>
+                
+                <div class="message agent">
+                    <strong>Key Insights:</strong><br>
+                    • Revenue is 78% to target - excellent progress!<br>
+                    • Customer acquisition needs attention - consider increasing marketing investment<br>
+                    • Product innovation is exceeding expectations<br><br>
+                    Would you like me to analyze any specific area in detail?
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" placeholder="Ask about strategy, metrics, or recommendations..." id="chat-input">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple chat functionality
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const input = e.target;
+                const message = input.value.trim();
+                
+                if (message) {
+                    // Add user message
+                    const chatMessages = document.getElementById('chat-messages');
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message user';
+                    userMessage.innerHTML = `<strong>You:</strong><br>${message}`;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // Clear input
+                    input.value = '';
+                    
+                    // Simulate agent response
+                    setTimeout(() => {
+                        const agentMessage = document.createElement('div');
+                        agentMessage.className = 'message agent';
+                        agentMessage.innerHTML = `<strong>Strategy Assistant:</strong><br>I understand you're asking about "${message}". Based on the current FY25 Growth Vision data, I can help analyze this further. What specific aspect would you like me to focus on?`;
+                        chatMessages.appendChild(agentMessage);
+                        
+                        // Scroll to bottom
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
