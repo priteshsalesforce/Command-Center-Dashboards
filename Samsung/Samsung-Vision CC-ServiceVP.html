@@ -884,55 +884,80 @@
         }
 
         .insight-card {
-            background: #1a1a1a;
-            border-radius: 12px;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 16px;
             padding: 1.5rem;
-            color: white;
+            color: #333;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .insight-header {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .insight-title {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #e5e5e5;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.75rem;
+        }
+
+        .insight-value-container {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
             margin-bottom: 0.5rem;
         }
 
         .insight-value {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 0.25rem;
+            line-height: 1;
         }
 
         .insight-value.negative {
-            color: #ff6b6b;
+            color: #ff4444;
         }
 
         .insight-value.positive {
-            color: #4ecdc4;
+            color: #00b894;
+        }
+
+        .insight-badge {
+            background: #ffe0e0;
+            color: #ff4444;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .insight-badge.positive {
+            background: #e0f7f0;
+            color: #00b894;
         }
 
         .insight-change {
             font-size: 0.9rem;
-            color: #a0a0a0;
-            margin-bottom: 1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
         }
 
         .insight-change.negative {
-            color: #ff6b6b;
+            color: #ff4444;
         }
 
         .insight-change.positive {
-            color: #4ecdc4;
+            color: #00b894;
         }
 
         .insight-chart-container {
-            height: 80px;
+            height: 100px;
             margin-bottom: 1rem;
             position: relative;
         }
@@ -943,37 +968,40 @@
         }
 
         .insight-description {
-            font-size: 0.85rem;
-            color: #a0a0a0;
-            line-height: 1.4;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-top: 1rem;
         }
 
         .insight-legend {
             display: flex;
-            gap: 1rem;
-            margin-top: 0.5rem;
+            gap: 1.5rem;
+            margin-top: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.75rem;
-            color: #a0a0a0;
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
         }
 
         .legend-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
         }
 
         .legend-dot.positive {
-            background-color: #4ecdc4;
+            background-color: #00b894;
         }
 
         .legend-dot.negative {
-            background-color: #ff6b6b;
+            background-color: #ff4444;
         }
 
         @media (max-width: 768px) {
@@ -5066,7 +5094,9 @@
                                     <div class="insight-card">
                                         <div class="insight-header">
                                             <div class="insight-title">Service Recovery Time</div>
-                                            <div class="insight-value negative">8.5hrs</div>
+                                            <div class="insight-value-container">
+                                                <div class="insight-value negative">8.5hrs</div>
+                                            </div>
                                             <div class="insight-change negative">+45% in next week</div>
                                         </div>
                                         <div class="insight-chart-container">
@@ -5078,7 +5108,9 @@
                                     <div class="insight-card">
                                         <div class="insight-header">
                                             <div class="insight-title">Customer Satisfaction Trend</div>
-                                            <div class="insight-value negative">1.8/5</div>
+                                            <div class="insight-value-container">
+                                                <div class="insight-value negative">1.8/5</div>
+                                            </div>
                                             <div class="insight-change negative">-25% in next quarter</div>
                                         </div>
                                         <div class="insight-chart-container">
@@ -9208,21 +9240,21 @@
                         labels: ['Mon', '', 'Wed', '', 'Fri', '', 'Next Week'],
                         datasets: [{
                             data: [4.2, 5.1, 6.8, 7.5, 8.5, 9.2, 10.1],
-                            borderColor: '#ff6b6b',
-                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                            borderColor: '#ff4444',
+                            backgroundColor: 'rgba(255, 68, 68, 0.1)',
                             tension: 0.4,
                             fill: true,
                             pointRadius: [0, 0, 0, 0, 4, 0, 0],
-                            pointBackgroundColor: '#ff6b6b',
-                            borderWidth: 2
+                            pointBackgroundColor: '#ff4444',
+                            borderWidth: 3
                         }, {
                             data: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
-                            borderColor: '#4ecdc4',
+                            borderColor: '#00b894',
                             backgroundColor: 'transparent',
                             borderDash: [5, 5],
                             tension: 0,
                             pointRadius: 0,
-                            borderWidth: 1
+                            borderWidth: 2
                         }]
                     },
                     options: {
@@ -9234,12 +9266,12 @@
                                 display: false, 
                                 min: 1, 
                                 max: 12,
-                                grid: { color: 'rgba(255,255,255,0.1)' }
+                                grid: { color: 'rgba(0,0,0,0.1)' }
                             },
                             x: { 
                                 display: true,
-                                ticks: { color: '#a0a0a0', font: { size: 10 } },
-                                grid: { color: 'rgba(255,255,255,0.05)' }
+                                ticks: { color: '#666', font: { size: 11 } },
+                                grid: { color: 'rgba(0,0,0,0.05)' }
                             }
                         }
                     }
@@ -9256,7 +9288,7 @@
                         datasets: [{
                             label: 'Target',
                             data: [4.2, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2],
-                            borderColor: '#4ecdc4',
+                            borderColor: '#00b894',
                             backgroundColor: 'transparent',
                             borderDash: [5, 5],
                             tension: 0,
@@ -9265,13 +9297,13 @@
                         }, {
                             label: 'Actual',
                             data: [3.8, 3.2, 2.1, 1.9, 1.8, 1.7, 1.6],
-                            borderColor: '#ff6b6b',
-                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                            borderColor: '#ff4444',
+                            backgroundColor: 'rgba(255, 68, 68, 0.1)',
                             tension: 0.4,
                             fill: true,
                             pointRadius: [0, 0, 4, 0, 0, 0, 0],
-                            pointBackgroundColor: '#ff6b6b',
-                            borderWidth: 2
+                            pointBackgroundColor: '#ff4444',
+                            borderWidth: 3
                         }]
                     },
                     options: {
@@ -9283,12 +9315,12 @@
                                 display: false, 
                                 min: 1, 
                                 max: 5,
-                                grid: { color: 'rgba(255,255,255,0.1)' }
+                                grid: { color: 'rgba(0,0,0,0.1)' }
                             },
                             x: { 
                                 display: true,
-                                ticks: { color: '#a0a0a0', font: { size: 10 } },
-                                grid: { color: 'rgba(255,255,255,0.05)' }
+                                ticks: { color: '#666', font: { size: 11 } },
+                                grid: { color: 'rgba(0,0,0,0.05)' }
                             }
                         }
                     }
