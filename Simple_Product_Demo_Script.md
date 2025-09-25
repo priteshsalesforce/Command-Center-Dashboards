@@ -1,113 +1,207 @@
-# Vision Command Center - Simple Product Demo Script
+# Vision Command Center - Samsung Service VP Demo Script
 
 ## 🎯 **Demo Overview**
-**Duration**: 3-4 minutes  
+**Duration**: 6-8 minutes  
 **Tone**: Clear, informative, matter-of-fact  
 **Focus**: Product features and functionality  
-**Approach**: Show what it is and how it works  
-**Context**: Internal demo to colleagues showing your Command Center vision using Samsung as example
+**Approach**: Piece-by-piece walkthrough of Service VP persona  
+**Context**: Internal demo to colleagues showing Command Center vision using Samsung Service VP as example
 
 ---
 
-## 🏠 **Opening - What This Is (0:00 - 0:20)**
+## 🏠 **Opening - What This Is (0:00 - 0:30)**
 
 *[Scene: Landing page]*
 
 **"This is the Vision Command Center - a unified dashboard that brings together business data from across the company. It's designed to give different roles in the company the information they need to make decisions and take action."**
 
-**"Let me show you how it works using Samsung as an example. We'll look at it from a CXO perspective first."**
+**"Today I'll show you how it works specifically for a Samsung Service VP persona. This demonstrates how the Command Center adapts to different roles and provides relevant insights for service operations."**
+
+*[Navigate to Samsung Service VP Dashboard]*
+
+**"Here's the Service VP view. Notice how the interface is tailored for service operations - focusing on customer satisfaction, support metrics, and operational efficiency."**
 
 ---
 
-## 📊 **Glance Tab - Key Metrics (0:20 - 1:00)**
+## 📊 **Glance Tab - Overview (0:30 - 2:30)**
 
-*[Scene: Navigate to CXO Dashboard, Glance tab]*
+*[Scene: Service VP Dashboard, Glance tab]*
 
-**"The Glance tab shows your key business metrics at a glance. You can see revenue, customer satisfaction, active customers, and support tickets."**
+### **Predictive Intelligence Center (0:30 - 1:00)**
+**"First, let's look at the Predictive Intelligence Center. This section shows AI-powered predictions and early warning signals."**
 
-*[Hover over metric cards]*
+*[Point to predictive metrics]*
 
-**"Each metric card shows the current value, the change from the previous period, and includes a small chart to show the trend. For example, here we can see revenue is at $78 million with a 12.3% increase."**
+**"Here we can see predictive insights like 'Service Recovery Time' showing 8.5 hours with a prediction of +45% increase in the next week. The AI is analyzing patterns to forecast potential issues before they become critical."**
 
-**"The mini-charts give you a quick visual of whether things are trending up or down without having to open detailed reports."**
+**"Customer Satisfaction Trend shows 1.8 out of 5 with a predicted -25% decline in the next quarter. This gives the Service VP advance warning to take preventive action."**
+
+### **Activity Feed (1:00 - 1:30)**
+*[Scroll to Activity Feed section]*
+
+**"Below that is the Activity Feed - a real-time stream of important events and updates relevant to service operations."**
+
+*[Point to activity items]*
+
+**"You can see recent activities like 'RF-9000X Support Cases increased 89%', 'Customer escalation from Premium account', and 'New knowledge base article published'. This keeps the Service VP informed of what's happening across service operations."**
+
+### **Activity Feed Details - Customer Satisfaction Crisis (1:30 - 2:30)**
+*[Click on Customer Satisfaction Crisis activity]*
+
+**"Let's look at this Customer Satisfaction Crisis in detail. When you click on an activity, you get the full context."**
+
+*[Show expanded details]*
+
+**"This shows that customer satisfaction dropped from 4.2 to 2.1 in the last 24 hours, primarily due to RF-9000X product issues. It provides the timeline, affected customer segments, and shows that 15,000 customers are impacted."**
+
+**"The system automatically correlates this with support case volume increases, social media sentiment drops, and provides recommended immediate actions like 'Activate crisis response team' and 'Implement proactive customer communication'."**
 
 ---
 
-## 🔍 **Monitor Tab - Alerts and Issues (1:00 - 1:40)**
+## 🔍 **Monitor Tab - Operational Intelligence (2:30 - 5:00)**
 
 *[Scene: Switch to Monitor tab]*
 
-**"The Monitor tab shows alerts and issues that need attention. These are organized by priority - critical, high, medium, and low."**
+### **Autonomous Operations Center (2:30 - 3:00)**
+**"Now let's look at the Monitor tab, which contains the Autonomous Operations Center. This is where the AI continuously monitors service operations and identifies issues that need attention."**
 
-*[Click on an alert card]*
+*[Point to autonomous operations section]*
 
-**"When you click on an alert, you get more details about the issue, including what's causing it, what the impact might be, and what actions you might want to take."**
+**"You can see alerts organized by priority - critical, high, medium, and low. The system automatically categorizes and prioritizes issues based on business impact and urgency."**
 
-**"For instance, this RF-9000X alert shows customer satisfaction dropped 23%, explains it's related to product issues, and suggests some next steps."**
+### **Dashboard Overview (3:00 - 4:00)**
+*[Navigate to main dashboard area]*
+
+**"The main dashboard area has several key components. Let me walk through each one:"**
+
+#### **Executive Performance Metrics & AI Insights (3:00 - 3:15)**
+*[Point to executive metrics]*
+
+**"At the top, we have Executive Performance Metrics showing key KPIs like Customer Satisfaction at 1.8/5, Average Response Time at 8.5 hours, and First Call Resolution at 67%. Each metric includes AI insights that explain trends and predict future performance."**
+
+#### **Cross-Cloud Intelligence (3:15 - 3:30)**
+*[Point to cross-cloud section]*
+
+**"The Cross-Cloud Intelligence section shows correlations between different systems - how service issues relate to sales impact, marketing campaigns, and product defects. For example, it's connecting the RF-9000X product issues to increased support volume and decreased customer satisfaction."**
+
+#### **Detailed Analysis - Service Case Volume & Resolution (3:30 - 4:00)**
+*[Click on Service Case Volume graph]*
+
+**"Here's the Detailed Analysis section. Let's look at the Service Case Volume & Resolution graph. This shows case volume trending upward with resolution times increasing."**
+
+*[Point to What-If Analysis button]*
+
+**"There's a 'What-If Analysis' feature that lets you model different scenarios. For example, 'What if we add 20 more support agents?' or 'What if we implement automated responses for common issues?'"**
+
+*[Click Ask Agentforce button]*
+
+**"And there's an 'Ask Agentforce' button where you can ask natural language questions about the data, like 'Why are resolution times increasing?' or 'What's causing the spike in RF-9000X cases?'"**
+
+### **Operational Views (4:00 - 5:00)**
+*[Navigate through different operational sections]*
+
+#### **Watchlist (4:00 - 4:15)**
+**"The Watchlist shows critical accounts and issues that need constant monitoring. These are typically high-value customers or escalated cases that require executive attention."**
+
+#### **Intraday (4:15 - 4:30)**
+**"Intraday shows real-time operational metrics - current queue lengths, agent availability, response times, and service level performance throughout the day."**
+
+#### **In-Progress Work (4:30 - 4:45)**
+**"In-Progress Work displays all active cases, their status, assigned agents, and expected resolution times. This gives the Service VP visibility into current workload and resource allocation."**
+
+#### **Backlogs (4:45 - 5:00)**
+**"Finally, Backlogs shows overdue cases, pending escalations, and work that's behind schedule. This helps identify capacity issues and areas needing immediate attention."**
 
 ---
 
-## 📈 **Analyze Tab - Detailed Data (1:40 - 2:20)**
-
-*[Scene: Switch to Analyze tab]*
-
-**"The Analyze tab provides more detailed charts and data for when you need to dig deeper into the numbers."**
-
-**"You can see trends over time, compare different metrics, and understand how different parts of your business are performing. The charts are interactive, so you can filter and drill down into specific time periods or segments."**
-
-**"This gives you the detailed view you need for analysis and reporting."**
-
----
-
-## ⚡ **Act Tab - Strategy and Actions (2:20 - 3:00)**
+## ⚡ **Act Tab - Strategy Orchestration (5:00 - 6:30)**
 
 *[Scene: Switch to Act tab]*
 
-**"The Act tab is where you can see and manage strategic initiatives and action plans. These strategy boards track progress on important business objectives."**
+### **Concept of Strategy Boards (5:00 - 5:30)**
+**"Now let's look at the Act tab, which introduces the concept of Strategy Boards. These aren't just static project trackers - they're intelligent, living documents that help orchestrate strategic initiatives."**
 
-*[Click on a strategy board card]*
+*[Point to strategy board grid]*
 
-**"Each strategy board shows the current status, progress percentage, key metrics, and timeline. When you click on one, it opens a detailed view where you can see more information and track progress."**
+**"Strategy Boards connect goals, metrics, actions, and outcomes in one place. Each board represents a major strategic initiative with real-time progress tracking, risk assessment, and AI-powered recommendations."**
+
+**"For a Service VP, these boards might include initiatives like 'Customer Experience Transformation', 'Service Efficiency Optimization', or crisis response plans."**
+
+### **RF-9000X Crisis Recovery Board (5:30 - 6:30)**
+*[Click on RF-9000X Crisis Recovery strategy board]*
+
+**"Let's look at this specific board - the RF-9000X Crisis Recovery. This demonstrates how the Command Center handles crisis management through structured strategy execution."**
 
 *[Show strategy board detail page]*
 
-**"The detailed view includes objectives, initiatives, risks, and timelines. There's also an AI assistant that can answer questions about the strategy and provide additional context."**
+**"The board shows we're 45% complete with an 'At Risk' status. You can see the key recovery metrics:"**
+
+- **"Customer Satisfaction: Currently 2.1/5 with a target of 4.2/5 - marked as Critical"**
+- **"Issue Resolution Rate: 65% with a target of 95% - Behind schedule"** 
+- **"Customer Retention: 72% with a target of 90% - Critical status"**
+- **"Response Time: 8.5 hours with a target of 2 hours - Critical"**
+
+*[Scroll through initiatives]*
+
+**"The recovery initiatives are clearly laid out: Emergency Product Recall is In Progress, Crisis Response Team is Active, Customer Compensation Program is Behind Schedule, and Quality Assurance Overhaul is in Planning."**
+
+*[Point to timeline]*
+
+**"There's a recovery timeline showing Week 1-2 Crisis Containment is Completed, Week 3-4 Customer Recovery is In Progress, and future phases for Trust Rebuilding and Process Enhancement."**
+
+*[Show Agentforce chat panel]*
+
+**"And notice the integrated AI assistant providing real-time strategic guidance and answering questions about the recovery plan."**
 
 ---
 
-## 👥 **Different Views for Different Roles (3:00 - 3:30)**
+## 👥 **Different Views for Different Roles (6:30 - 7:00)**
 
-*[Scene: Navigate to Service VP dashboard]*
+*[Scene: Navigate briefly to CXO dashboard]*
 
-**"The Command Center adapts to different roles in the company. Here's the same system from a Service VP perspective."**
+**"The Command Center adapts to different roles in the company. We've been looking at the Service VP view, but here's how the same crisis looks from a CXO perspective."**
 
-**"The layout and metrics are similar, but the focus is on service-specific data - response times, customer satisfaction from a service angle, and operational metrics that matter to service teams."**
+*[Show CXO dashboard briefly]*
 
-**"Each role gets the information that's most relevant to their responsibilities and decision-making needs."**
+**"The CXO sees the same RF-9000X crisis, but with a focus on overall business impact - revenue at risk, brand reputation, and cross-functional coordination. The data is the same, but the presentation and priorities are tailored to executive decision-making."**
+
+*[Return to Service VP view]*
+
+**"Each role gets the information that's most relevant to their responsibilities and decision-making needs, while maintaining visibility into the broader business context."**
 
 ---
 
-## 🤖 **AI Assistant Integration (3:30 - 4:00)**
+## 🤖 **AI Assistant Integration (7:00 - 7:30)**
 
 *[Scene: Show Agentforce chat panel]*
 
-**"Throughout the system, there's an AI assistant called Agentforce that can answer questions about the data, explain trends, and help understand what actions might be needed."**
+**"Throughout the system, there's an AI assistant called Agentforce that provides contextual intelligence and guidance."**
 
 *[Demonstrate a simple chat interaction]*
 
-**"You can ask it questions in natural language, and it provides answers based on the business data and context."**
+**"You can ask it questions in natural language like 'What's causing the increase in RF-9000X cases?' or 'What should be our priority action for improving customer satisfaction?' It provides answers based on the business data, current context, and strategic objectives."**
+
+**"The AI understands the Service VP's role and provides recommendations specific to service operations - whether that's resource allocation, process improvements, or crisis response strategies."**
 
 ---
 
-## 📱 **Summary - What You Get (4:00 - 4:20)**
+## 📱 **Summary - What You Get (7:30 - 8:00)**
 
 *[Scene: Return to main dashboard view]*
 
-**"So in summary, the Vision Command Center gives you a unified view of the business with four main areas: key metrics at a glance, alerts and issues to monitor, detailed analytics when you need to dig deeper, and strategy tracking to manage initiatives."**
+**"So in summary, the Vision Command Center gives you a role-specific, intelligent view of the business with four main areas:"**
 
-**"It's designed to work for different roles in the company, and includes AI assistance to help understand the data and make decisions."**
+**"The Glance tab with predictive intelligence and activity feeds for situational awareness."**
 
-**"That's the Vision Command Center - a centralized place to see, understand, and act on business information."**
+**"The Monitor tab with autonomous operations monitoring, detailed analytics, and operational views for day-to-day management."**
+
+**"The Act tab with intelligent strategy boards for coordinating major initiatives and crisis response."**
+
+**"And throughout, AI assistance that understands your role and provides contextual guidance for decision-making."**
+
+**"It's designed to work for different roles in the company - from Service VPs managing operations to CXOs overseeing strategy - while maintaining a unified view of business information and enabling coordinated action across the organization."**
+
+**"That's the Vision Command Center - a centralized, intelligent interface for seeing, understanding, and acting on business information."**
 
 ---
 
