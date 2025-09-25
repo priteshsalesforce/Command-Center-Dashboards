@@ -6205,6 +6205,14 @@
                         initializeCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
+                
+                // If Glance tab is clicked, initialize metric charts after a short delay
+                if (tabId === 'glance') {
+                    console.log('Glance tab activated, initializing metric charts...');
+                    setTimeout(() => {
+                        initializeMetricCharts();
+                    }, 500); // Increased delay to ensure tab content is fully visible
+                }
             });
         });
 
@@ -6230,6 +6238,14 @@
                     console.log('Monitor tab activated, initializing charts...');
                     setTimeout(() => {
                         initializeCharts();
+                    }, 500); // Increased delay to ensure tab content is fully visible
+                }
+                
+                // If Glance tab is clicked, initialize metric charts after a short delay
+                if (tabId === 'glance') {
+                    console.log('Glance tab activated, initializing metric charts...');
+                    setTimeout(() => {
+                        initializeMetricCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
             });
@@ -8442,6 +8458,33 @@
         function initializeMetricCharts() {
             console.log('Initializing metric charts...');
             
+            // Check if Chart.js is loaded
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js library is not loaded for metric charts!');
+                return;
+            }
+            
+            // Debug: Check if metric chart containers exist
+            const metricChartContainers = [
+                'chart-customer-satisfaction',
+                'chart-service-resolution',
+                'chart-first-contact-resolution',
+                'chart-customer-lifetime-value',
+                'chart-nps',
+                'chart-enterprise-escalations',
+                'chart-churn-risk',
+                'chart-social-sentiment'
+            ];
+            
+            metricChartContainers.forEach(id => {
+                const element = document.getElementById(id);
+                console.log(`Metric chart container ${id}:`, element ? 'Found' : 'NOT FOUND');
+                if (element) {
+                    console.log(`  - Visible:`, element.offsetParent !== null);
+                    console.log(`  - Dimensions:`, element.clientWidth, 'x', element.clientHeight);
+                }
+            });
+            
             // Customer Satisfaction Chart (Line chart showing decline trend)
             const custSatCtx = document.getElementById('chart-customer-satisfaction');
             if (custSatCtx) {
@@ -9319,7 +9362,13 @@
                 }
             }, 500);
             
-            // Check if Monitor tab is already active and initialize charts
+            // Initialize metric charts on page load since they're in the default Glance tab
+            setTimeout(() => {
+                console.log('Initializing metric charts on page load...');
+                initializeMetricCharts();
+            }, 1000); // Delay to ensure everything is loaded
+            
+            // Check if Monitor tab is already active and initialize main charts
             setTimeout(() => {
                 const monitorTab = document.getElementById('monitor');
                 if (monitorTab && monitorTab.classList.contains('active')) {

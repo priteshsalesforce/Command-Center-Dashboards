@@ -6494,6 +6494,14 @@
                         initializeCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
+                
+                // If Glance tab is clicked, initialize metric charts after a short delay
+                if (tabId === 'glance') {
+                    console.log('Glance tab activated, initializing Service VP metric charts...');
+                    setTimeout(() => {
+                        initializeServiceVPMetricCharts();
+                    }, 500); // Increased delay to ensure tab content is fully visible
+                }
             });
         });
 
@@ -6518,6 +6526,14 @@
                     console.log('Monitor tab activated, initializing charts...');
                     setTimeout(() => {
                         initializeCharts();
+                    }, 500); // Increased delay to ensure tab content is fully visible
+                }
+                
+                // If Glance tab is clicked, initialize metric charts after a short delay
+                if (tabId === 'glance') {
+                    console.log('Glance tab activated, initializing Service VP metric charts...');
+                    setTimeout(() => {
+                        initializeServiceVPMetricCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
             });
@@ -8775,6 +8791,33 @@
         function initializeServiceVPMetricCharts() {
             console.log('Initializing Service VP metric charts...');
             
+            // Check if Chart.js is loaded
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js library is not loaded for Service VP metric charts!');
+                return;
+            }
+            
+            // Debug: Check if metric chart containers exist
+            const metricChartContainers = [
+                'chart-customer-satisfaction-vp',
+                'chart-service-resolution-vp',
+                'chart-first-contact-resolution-vp',
+                'chart-customer-lifetime-value-vp',
+                'chart-nps-vp',
+                'chart-enterprise-escalations-vp',
+                'chart-churn-risk-vp',
+                'chart-social-sentiment-vp'
+            ];
+            
+            metricChartContainers.forEach(id => {
+                const element = document.getElementById(id);
+                console.log(`Service VP metric chart container ${id}:`, element ? 'Found' : 'NOT FOUND');
+                if (element) {
+                    console.log(`  - Visible:`, element.offsetParent !== null);
+                    console.log(`  - Dimensions:`, element.clientWidth, 'x', element.clientHeight);
+                }
+            });
+            
             // Customer Satisfaction Chart (Severe decline trend)
             const custSatCtx = document.getElementById('chart-customer-satisfaction-vp');
             if (custSatCtx) {
@@ -9653,7 +9696,13 @@
                 }
             }, 500);
             
-            // Check if Monitor tab is already active and initialize charts
+            // Initialize metric charts on page load since they're in the default Glance tab
+            setTimeout(() => {
+                console.log('Initializing Service VP metric charts on page load...');
+                initializeServiceVPMetricCharts();
+            }, 1000); // Delay to ensure everything is loaded
+            
+            // Check if Monitor tab is already active and initialize main charts
             setTimeout(() => {
                 const monitorTab = document.getElementById('monitor');
                 if (monitorTab && monitorTab.classList.contains('active')) {
