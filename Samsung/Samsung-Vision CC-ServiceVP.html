@@ -862,149 +862,6 @@
             line-height: 1.5;
         }
 
-        /* Predictive Insights Styles */
-        .predictive-insights-section {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: white;
-            border: 1px solid var(--slds-c-color-border);
-            border-radius: 8px;
-        }
-
-        .predictive-insights-section h3 {
-            margin: 0 0 1.5rem 0;
-            color: var(--text-primary);
-            font-size: 1.1rem;
-        }
-
-        .insights-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .insight-card {
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 16px;
-            padding: 1.5rem;
-            color: #333;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .insight-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .insight-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.75rem;
-        }
-
-        .insight-value-container {
-            display: flex;
-            align-items: baseline;
-            gap: 0.75rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .insight-value {
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .insight-value.negative {
-            color: #ff4444;
-        }
-
-        .insight-value.positive {
-            color: #00b894;
-        }
-
-        .insight-badge {
-            background: #ffe0e0;
-            color: #ff4444;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .insight-badge.positive {
-            background: #e0f7f0;
-            color: #00b894;
-        }
-
-        .insight-change {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .insight-change.negative {
-            color: #ff4444;
-        }
-
-        .insight-change.positive {
-            color: #00b894;
-        }
-
-        .insight-chart-container {
-            height: 100px;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .insight-chart {
-            width: 100%;
-            height: 100%;
-        }
-
-        .insight-description {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.5;
-            margin-top: 1rem;
-        }
-
-        .insight-legend {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .legend-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .legend-dot.positive {
-            background-color: #00b894;
-        }
-
-        .legend-dot.negative {
-            background-color: #ff4444;
-        }
-
-
         /* Recommended Actions Styles */
         .recommended-actions-section {
             margin-bottom: 2rem;
@@ -5081,50 +4938,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Predictive Insights -->
-                            <div class="predictive-insights-section">
-                                <h3>🔮 Predictive Insights</h3>
-                                <div class="insights-grid">
-                                    <div class="insight-card">
-                                        <div class="insight-header">
-                                            <div class="insight-title">Service Recovery Time</div>
-                                            <div class="insight-value-container">
-                                                <div class="insight-value negative">8.5hrs</div>
-                                            </div>
-                                            <div class="insight-change negative">+45% in next week</div>
-                                        </div>
-                                        <div class="insight-chart-container">
-                                            <canvas id="service-recovery-chart" class="insight-chart"></canvas>
-                                        </div>
-                                        <div class="insight-description">Current escalation patterns suggest extended resolution times ahead.</div>
-                                    </div>
-                                    
-                                    <div class="insight-card">
-                                        <div class="insight-header">
-                                            <div class="insight-title">Customer Satisfaction Trend</div>
-                                            <div class="insight-value-container">
-                                                <div class="insight-value negative">1.8/5</div>
-                                            </div>
-                                            <div class="insight-change negative">-25% in next quarter</div>
-                                        </div>
-                                        <div class="insight-chart-container">
-                                            <canvas id="csat-prediction-chart" class="insight-chart"></canvas>
-                                        </div>
-                                        <div class="insight-legend">
-                                            <div class="legend-item">
-                                                <div class="legend-dot positive"></div>
-                                                <span>Target</span>
-                                            </div>
-                                            <div class="legend-item">
-                                                <div class="legend-dot negative"></div>
-                                                <span>Actual</span>
-                                            </div>
-                                        </div>
-                                        <div class="insight-description">Service disruption impact will continue affecting satisfaction scores.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
                             <!-- Recommended Actions -->
                             <div class="recommended-actions-section">
                                 <h3>🎯 Recommended Actions</h3>
@@ -6687,7 +6500,6 @@
                     console.log('Glance tab activated, initializing Service VP metric charts...');
                     setTimeout(() => {
                         initializeServiceVPMetricCharts();
-                        initializeServiceVPPredictiveInsightsCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
             });
@@ -6722,7 +6534,6 @@
                     console.log('Glance tab activated, initializing Service VP metric charts...');
                     setTimeout(() => {
                         initializeServiceVPMetricCharts();
-                        initializeServiceVPPredictiveInsightsCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
             });
@@ -9221,108 +9032,6 @@
             console.log('Service VP metric charts initialized successfully!');
         }
 
-        // Initialize Service VP Predictive Insights Charts
-        function initializeServiceVPPredictiveInsightsCharts() {
-            console.log('Initializing Service VP predictive insights charts...');
-            
-            // Service Recovery Time Chart
-            const recoveryCtx = document.getElementById('service-recovery-chart');
-            if (recoveryCtx) {
-                new Chart(recoveryCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Mon', '', 'Wed', '', 'Fri', '', 'Next Week'],
-                        datasets: [{
-                            data: [4.2, 5.1, 6.8, 7.5, 8.5, 9.2, 10.1],
-                            borderColor: '#ff4444',
-                            backgroundColor: 'rgba(255, 68, 68, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointRadius: [0, 0, 0, 0, 4, 0, 0],
-                            pointBackgroundColor: '#ff4444',
-                            borderWidth: 3
-                        }, {
-                            data: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
-                            borderColor: '#00b894',
-                            backgroundColor: 'transparent',
-                            borderDash: [5, 5],
-                            tension: 0,
-                            pointRadius: 0,
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { 
-                                display: false, 
-                                min: 1, 
-                                max: 12,
-                                grid: { color: 'rgba(0,0,0,0.1)' }
-                            },
-                            x: { 
-                                display: true,
-                                ticks: { color: '#666', font: { size: 11 } },
-                                grid: { color: 'rgba(0,0,0,0.05)' }
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Customer Satisfaction Prediction Chart
-            const csatCtx = document.getElementById('csat-prediction-chart');
-            if (csatCtx) {
-                new Chart(csatCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Week 1', '', 'Today', '', 'Week 3', '', 'Next Q'],
-                        datasets: [{
-                            label: 'Target',
-                            data: [4.2, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2],
-                            borderColor: '#00b894',
-                            backgroundColor: 'transparent',
-                            borderDash: [5, 5],
-                            tension: 0,
-                            pointRadius: 0,
-                            borderWidth: 2
-                        }, {
-                            label: 'Actual',
-                            data: [3.8, 3.2, 2.1, 1.9, 1.8, 1.7, 1.6],
-                            borderColor: '#ff4444',
-                            backgroundColor: 'rgba(255, 68, 68, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointRadius: [0, 0, 4, 0, 0, 0, 0],
-                            pointBackgroundColor: '#ff4444',
-                            borderWidth: 3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { 
-                                display: false, 
-                                min: 1, 
-                                max: 5,
-                                grid: { color: 'rgba(0,0,0,0.1)' }
-                            },
-                            x: { 
-                                display: true,
-                                ticks: { color: '#666', font: { size: 11 } },
-                                grid: { color: 'rgba(0,0,0,0.05)' }
-                            }
-                        }
-                    }
-                });
-            }
-
-            console.log('Service VP predictive insights charts initialized successfully!');
-        }
 
         // Enhanced Agentforce Chat Functions
         var enhancedChatHistory = [];
@@ -9992,7 +9701,6 @@
             setTimeout(() => {
                 console.log('Initializing Service VP metric charts on page load...');
                 initializeServiceVPMetricCharts();
-                initializeServiceVPPredictiveInsightsCharts();
             }, 1000); // Delay to ensure everything is loaded
             
             // Check if Monitor tab is already active and initialize main charts

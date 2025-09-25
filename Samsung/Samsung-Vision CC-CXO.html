@@ -817,149 +817,6 @@
             line-height: 1.5;
         }
 
-        /* Predictive Insights Styles */
-        .predictive-insights-section {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: white;
-            border: 1px solid var(--slds-c-color-border);
-            border-radius: 8px;
-        }
-
-        .predictive-insights-section h3 {
-            margin: 0 0 1.5rem 0;
-            color: var(--text-primary);
-            font-size: 1.1rem;
-        }
-
-        .insights-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .insight-card {
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 16px;
-            padding: 1.5rem;
-            color: #333;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .insight-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .insight-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.75rem;
-        }
-
-        .insight-value-container {
-            display: flex;
-            align-items: baseline;
-            gap: 0.75rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .insight-value {
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .insight-value.negative {
-            color: #ff4444;
-        }
-
-        .insight-value.positive {
-            color: #00b894;
-        }
-
-        .insight-badge {
-            background: #ffe0e0;
-            color: #ff4444;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .insight-badge.positive {
-            background: #e0f7f0;
-            color: #00b894;
-        }
-
-        .insight-change {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .insight-change.negative {
-            color: #ff4444;
-        }
-
-        .insight-change.positive {
-            color: #00b894;
-        }
-
-        .insight-chart-container {
-            height: 100px;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .insight-chart {
-            width: 100%;
-            height: 100%;
-        }
-
-        .insight-description {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.5;
-            margin-top: 1rem;
-        }
-
-        .insight-legend {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .legend-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .legend-dot.positive {
-            background-color: #00b894;
-        }
-
-        .legend-dot.negative {
-            background-color: #ff4444;
-        }
-
-
         /* Recommended Actions Styles */
         .recommended-actions-section {
             margin-bottom: 2rem;
@@ -5036,51 +4893,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Predictive Insights -->
-                            <div class="predictive-insights-section">
-                                <h3>🔮 Predictive Insights</h3>
-                                <div class="insights-grid">
-                                    <div class="insight-card">
-                                        <div class="insight-header">
-                                            <div class="insight-title">Account Churn Risk</div>
-                                            <div class="insight-value-container">
-                                                <div class="insight-value negative">30%</div>
-                                            </div>
-                                            <div class="insight-change negative">+31.7% in next quarter</div>
-                                        </div>
-                                        <div class="insight-chart-container">
-                                            <canvas id="churn-prediction-chart" class="insight-chart"></canvas>
-                                        </div>
-                                        <div class="insight-description">Marketing spend on new campaigns was higher than projected.</div>
-                                    </div>
-                                    
-                                    <div class="insight-card">
-                                        <div class="insight-header">
-                                            <div class="insight-title">Campaign Y Sentiment Trend</div>
-                                            <div class="insight-value-container">
-                                                <div class="insight-value negative">65%</div>
-                                                <div class="insight-badge">Negative</div>
-                                            </div>
-                                            <div class="insight-change negative">+11.7% in next quarter</div>
-                                        </div>
-                                        <div class="insight-chart-container">
-                                            <canvas id="sentiment-prediction-chart" class="insight-chart"></canvas>
-                                        </div>
-                                        <div class="insight-legend">
-                                            <div class="legend-item">
-                                                <div class="legend-dot positive"></div>
-                                                <span>Positive</span>
-                                            </div>
-                                            <div class="legend-item">
-                                                <div class="legend-dot negative"></div>
-                                                <span>Negative</span>
-                                            </div>
-                                        </div>
-                                        <div class="insight-description">Marketing spend on new campaigns was higher than projected.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
                             <!-- Recommended Actions -->
                             <div class="recommended-actions-section">
                                 <h3>🎯 Recommended Actions</h3>
@@ -6399,7 +6211,6 @@
                     console.log('Glance tab activated, initializing metric charts...');
                     setTimeout(() => {
                         initializeMetricCharts();
-                        initializePredictiveInsightsCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
             });
@@ -6435,7 +6246,6 @@
                     console.log('Glance tab activated, initializing metric charts...');
                     setTimeout(() => {
                         initializeMetricCharts();
-                        initializePredictiveInsightsCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
             });
@@ -8889,109 +8699,6 @@
             console.log('Metric charts initialized successfully!');
         }
 
-        // Initialize Predictive Insights Charts
-        function initializePredictiveInsightsCharts() {
-            console.log('Initializing predictive insights charts...');
-            
-            // Account Churn Risk Chart
-            const churnCtx = document.getElementById('churn-prediction-chart');
-            if (churnCtx) {
-                new Chart(churnCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['1 Oct', '', 'Today', '', 'Q3', '', 'Q4'],
-                        datasets: [{
-                            data: [18, 22, 25, 28, 30, 32, 35],
-                            borderColor: '#ff4444',
-                            backgroundColor: 'rgba(255, 68, 68, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointRadius: [0, 0, 4, 0, 0, 0, 0],
-                            pointBackgroundColor: '#ff4444',
-                            borderWidth: 3
-                        }, {
-                            data: [18, 19, 25, 26, 28, 29, 30],
-                            borderColor: '#00b894',
-                            backgroundColor: 'transparent',
-                            borderDash: [5, 5],
-                            tension: 0.4,
-                            pointRadius: 0,
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { 
-                                display: false, 
-                                min: 15, 
-                                max: 40,
-                                grid: { color: 'rgba(0,0,0,0.1)' }
-                            },
-                            x: { 
-                                display: true,
-                                ticks: { color: '#666', font: { size: 11 } },
-                                grid: { color: 'rgba(0,0,0,0.05)' }
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Campaign Sentiment Prediction Chart
-            const sentimentCtx = document.getElementById('sentiment-prediction-chart');
-            if (sentimentCtx) {
-                new Chart(sentimentCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['1 Oct', '', 'Today', '', 'Q3', '', 'Q4'],
-                        datasets: [{
-                            label: 'Positive',
-                            data: [75, 70, 65, 60, 55, 50, 45],
-                            borderColor: '#00b894',
-                            backgroundColor: 'rgba(0, 184, 148, 0.15)',
-                            tension: 0.4,
-                            fill: true,
-                            pointRadius: [0, 0, 4, 0, 0, 0, 0],
-                            pointBackgroundColor: '#00b894',
-                            borderWidth: 3
-                        }, {
-                            label: 'Negative',
-                            data: [25, 30, 35, 40, 45, 50, 55],
-                            borderColor: '#ff4444',
-                            backgroundColor: 'rgba(255, 68, 68, 0.15)',
-                            tension: 0.4,
-                            fill: true,
-                            pointRadius: [0, 0, 4, 0, 0, 0, 0],
-                            pointBackgroundColor: '#ff4444',
-                            borderWidth: 3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { 
-                                display: false, 
-                                min: 0, 
-                                max: 100,
-                                grid: { color: 'rgba(0,0,0,0.1)' }
-                            },
-                            x: { 
-                                display: true,
-                                ticks: { color: '#666', font: { size: 11 } },
-                                grid: { color: 'rgba(0,0,0,0.05)' }
-                            }
-                        }
-                    }
-                });
-            }
-
-            console.log('Predictive insights charts initialized successfully!');
-        }
 
         // Enhanced Agentforce Chat Functions
         var enhancedChatHistory = [];
@@ -9660,7 +9367,6 @@
             setTimeout(() => {
                 console.log('Initializing metric charts on page load...');
                 initializeMetricCharts();
-                initializePredictiveInsightsCharts();
             }, 1000); // Delay to ensure everything is loaded
             
             // Check if Monitor tab is already active and initialize main charts
