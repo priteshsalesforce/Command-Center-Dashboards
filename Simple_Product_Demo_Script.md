@@ -4,7 +4,8 @@
 **Duration**: 3-4 minutes  
 **Tone**: Clear, informative, matter-of-fact  
 **Focus**: Product features and functionality  
-**Approach**: Show what it is and how it works
+**Approach**: Show what it is and how it works  
+**Context**: Internal demo to colleagues showing your Command Center vision using Samsung as example
 
 ---
 
@@ -12,7 +13,7 @@
 
 *[Scene: Landing page]*
 
-**"This is the Vision Command Center - a unified dashboard that brings together business data from across your organization. It's designed to give different roles in your company the information they need to make decisions and take action."**
+**"This is the Vision Command Center - a unified dashboard that brings together business data from across the company. It's designed to give different roles in the company the information they need to make decisions and take action."**
 
 **"Let me show you how it works using Samsung as an example. We'll look at it from a CXO perspective first."**
 
@@ -78,7 +79,7 @@
 
 *[Scene: Navigate to Service VP dashboard]*
 
-**"The Command Center adapts to different roles in your organization. Here's the same system from a Service VP perspective."**
+**"The Command Center adapts to different roles in the company. Here's the same system from a Service VP perspective."**
 
 **"The layout and metrics are similar, but the focus is on service-specific data - response times, customer satisfaction from a service angle, and operational metrics that matter to service teams."**
 
@@ -90,11 +91,11 @@
 
 *[Scene: Show Agentforce chat panel]*
 
-**"Throughout the system, there's an AI assistant called Agentforce that can answer questions about your data, explain trends, and help you understand what actions you might want to take."**
+**"Throughout the system, there's an AI assistant called Agentforce that can answer questions about the data, explain trends, and help understand what actions might be needed."**
 
 *[Demonstrate a simple chat interaction]*
 
-**"You can ask it questions in natural language, and it provides answers based on your business data and context."**
+**"You can ask it questions in natural language, and it provides answers based on the business data and context."**
 
 ---
 
@@ -102,11 +103,11 @@
 
 *[Scene: Return to main dashboard view]*
 
-**"So in summary, the Vision Command Center gives you a unified view of your business with four main areas: key metrics at a glance, alerts and issues to monitor, detailed analytics when you need to dig deeper, and strategy tracking to manage your initiatives."**
+**"So in summary, the Vision Command Center gives you a unified view of the business with four main areas: key metrics at a glance, alerts and issues to monitor, detailed analytics when you need to dig deeper, and strategy tracking to manage initiatives."**
 
-**"It's designed to work for different roles in your organization, and includes AI assistance to help you understand your data and make decisions."**
+**"It's designed to work for different roles in the company, and includes AI assistance to help understand the data and make decisions."**
 
-**"That's the Vision Command Center - a centralized place to see, understand, and act on your business information."**
+**"That's the Vision Command Center - a centralized place to see, understand, and act on business information."**
 
 ---
 
