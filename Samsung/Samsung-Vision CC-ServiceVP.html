@@ -6151,8 +6151,8 @@
             <!-- Strategic V2MOM Initiatives -->
             <div class="metrics-section">
                 <h3 class="section-title">
-                    Strategy Boards
-                    <button class="add-metric-btn" id="add-strategic-board">+ Create Strategic Board</button>
+                    Canvas
+                    <button class="add-metric-btn" id="add-strategic-board">+ Create Canvas</button>
                 </h3>
                 <div class="strategy-boards-grid">
                     <div class="strategy-board-card clickable" data-strategy-id="1" onclick="openStrategyBoardDetail(1)">
@@ -7433,8 +7433,8 @@
         document.querySelectorAll('.board-link').forEach(button => {
             button.addEventListener('click', function() {
                 const boardId = this.getAttribute('data-board');
-                // In real implementation, this would navigate to the strategy board
-                alert(`Navigating to strategy board: ${boardId}`);
+                // In real implementation, this would navigate to the canvas
+                alert(`Navigating to canvas: ${boardId}`);
             });
         });
 
@@ -7447,7 +7447,7 @@
         });
         }
 
-        // Strategy board selection functionality
+        // Canvas selection functionality
         document.querySelectorAll('.strategy-board').forEach(board => {
             board.addEventListener('click', function(e) {
                 if (e.target.tagName === 'BUTTON') return;
@@ -7607,7 +7607,7 @@
                         <div class="header-content">
                             <div class="header-icon">🎯</div>
                             <div class="header-text">
-                                <h2>Create Strategy Board</h2>
+                                <h2>Create Canvas</h2>
                                 <p>Build strategic initiatives with AI-powered insights and templates</p>
                             </div>
                         </div>
@@ -7758,7 +7758,7 @@
                                     <div class="form-group">
                                         <label>Initiative Title *</label>
                                         <input type="text" id="board-title" placeholder="e.g., Q1 Revenue Acceleration Strategy">
-                                        <small>Give your strategy board a clear, descriptive name</small>
+                                        <small>Give your canvas a clear, descriptive name</small>
                                     </div>
                                     
                                     <div class="form-group">
@@ -7854,7 +7854,7 @@
                             <button type="button" class="btn-back" id="back-btn" style="display: none;" onclick="previousStep()">← Back</button>
                             <button type="button" class="btn-primary" id="next-btn" onclick="nextStep()">Continue →</button>
                             <button type="button" class="btn-primary" id="create-btn" style="display: none;" onclick="createStrategicBoard()">
-                                🤖 Create Strategy Board
+                                🤖 Create Canvas
                             </button>
                         </div>
                     </div>
@@ -7941,7 +7941,7 @@
                 
                 // Close modal and show success
                 document.body.removeChild(modal);
-                showSuccessMessage('🎯 Strategy board created successfully! AI analysis and recommendations have been generated.');
+                showSuccessMessage('🎯 Canvas created successfully! AI analysis and recommendations have been generated.');
             };
             
             // Template selection functionality
@@ -9209,7 +9209,7 @@
                 response = "👥 Your team performance shows strong engagement (87%) but I've identified potential retention risks in Engineering and Sales. I recommend implementing targeted development programs and addressing workload balance. Would you like a detailed people analytics report?";
                 
             } else if (message.includes('strategy') || message.includes('planning')) {
-                response = "🎯 I can help you with strategic planning! I have access to market trends, competitive intelligence, and your historical performance data. I can create strategy boards, analyze scenarios, or provide recommendations. What strategic area would you like to focus on?";
+                response = "🎯 I can help you with strategic planning! I have access to market trends, competitive intelligence, and your historical performance data. I can create canvas boards, analyze scenarios, or provide recommendations. What strategic area would you like to focus on?";
                 
             } else if (message.includes('risk') || message.includes('compliance')) {
                 response = "⚠️ I'm monitoring 12 risk factors across your business. Current risk score is Medium-Low, but I've flagged potential supply chain disruptions and regulatory changes in your key markets. Should I create a risk mitigation plan?";

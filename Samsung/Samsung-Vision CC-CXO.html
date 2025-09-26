@@ -5009,7 +5009,7 @@
                             
                             <!-- Related Strategy Boards -->
                             <div class="related-boards-section">
-                                <h3>📋 Related Strategy Boards</h3>
+                                <h3>📋 Related Canvas</h3>
                                 <div class="boards-list">
                                     <div class="board-reference">
                                         <div class="board-name">Customer Experience Excellence</div>
@@ -5849,8 +5849,8 @@
             <!-- Strategic V2MOM Initiatives -->
             <div class="metrics-section">
                 <h3 class="section-title">
-                    Strategy Boards
-                    <button class="add-metric-btn" id="add-strategic-board">+ Create Strategic Board</button>
+                    Canvas
+                    <button class="add-metric-btn" id="add-strategic-board">+ Create Canvas</button>
                 </h3>
                 <div class="strategy-boards-grid">
                     <div class="strategy-board-card clickable" data-strategy-id="1" onclick="openStrategyBoardDetail(1)">
@@ -6338,7 +6338,7 @@
             });
         });
 
-        // Create Strategic Board functionality
+        // Create Canvas functionality
         document.getElementById('add-strategic-board').addEventListener('click', function() {
             showCreateStrategicBoardModal();
         });
@@ -7306,7 +7306,7 @@
         document.querySelectorAll('.board-action').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.stopPropagation();
-                console.log('Strategic board action:', this.textContent);
+                console.log('Canvas action:', this.textContent);
             });
         });
 
@@ -7641,7 +7641,7 @@
                 const priority = modal.querySelector('#board-priority').value;
                 const description = modal.querySelector('#board-description').value;
                 
-                // Create new strategic board
+                // Create new canvas
                 addNewStrategicBoard({ 
                     title, 
                     category: selectedTemplate, 
