@@ -4622,9 +4622,9 @@
         </div>
          <div class="header-nav">
              <div class="header-tab-navigation">
-                 <button class="header-tab-button active" data-tab="glance">Glance</button>
+                <button class="header-tab-button active" data-tab="glance">Feed</button>
                  <button class="header-tab-button" data-tab="monitor">Monitor</button>
-                 <button class="header-tab-button" data-tab="act">Act</button>
+                <button class="header-tab-button" data-tab="act">Canvas</button>
              </div>
          </div>
         <div class="user-info">
@@ -4850,7 +4850,7 @@
                                         </div>
                                         <div class="metric-change negative">-18 points</div>
                                         <button class="metric-hover-btn" onclick="event.stopPropagation()">🤖 Ask Agentforce</button>
-                                    </div>
+                                </div>
 
                                     <!-- Critical Customer Signal Metrics -->
                                     <div class="metric-card clickable-metric" data-metric="enterprise-escalations" onclick="showPropagation('enterprise-escalations')">
@@ -6495,9 +6495,9 @@
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
                 
-                // If Glance tab is clicked, initialize metric charts after a short delay
+                // If Feed tab is clicked, initialize metric charts after a short delay
                 if (tabId === 'glance') {
-                    console.log('Glance tab activated, initializing Service VP metric charts...');
+                    console.log('Feed tab activated, initializing Service VP metric charts...');
                     setTimeout(() => {
                         initializeServiceVPMetricCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
@@ -6529,9 +6529,9 @@
                     }, 500); // Increased delay to ensure tab content is fully visible
                 }
                 
-                // If Glance tab is clicked, initialize metric charts after a short delay
+                // If Feed tab is clicked, initialize metric charts after a short delay
                 if (tabId === 'glance') {
-                    console.log('Glance tab activated, initializing Service VP metric charts...');
+                    console.log('Feed tab activated, initializing Service VP metric charts...');
                     setTimeout(() => {
                         initializeServiceVPMetricCharts();
                     }, 500); // Increased delay to ensure tab content is fully visible
@@ -8767,7 +8767,7 @@
                                 beginAtZero: true,
                                 grid: { color: '#E5E5E5' },
                                 title: {
-                                    display: true,
+                                display: true,
                                     text: 'Number of Customers'
                                 }
                             },
@@ -8892,7 +8892,7 @@
                     }
                 });
             }
-
+            
             // Customer Lifetime Value Chart (Decline trend)
             const clvCtx = document.getElementById('chart-customer-lifetime-value-vp');
             if (clvCtx) {
